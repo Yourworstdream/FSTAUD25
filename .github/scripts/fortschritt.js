@@ -326,9 +326,14 @@ async function pagesAktiv(github, owner, repo, core) {
 async function labelsAnlegen(github, owner, repo, core) {
   try {
     const vorhanden = await github.paginate(github.rest.issues.listLabelsForRepo, { owner, repo, per_page: 100 });
-    const namen = new Set(vorhanden.map((label) => label.name.toLowerCase()));
+    const namen = new Map(vorhanden.map((label) => [label.name.toLowerCase(), label]));
     for (const label of LABELS) {
-      if (!namen.has(label.name)) await github.rest.issues.createLabel({ owner, repo, ...label });
+      const alt = namen.get(label.name);
+      if (!alt) await github.rest.issues.createLabel({ owner, repo, ...label });
+      // Beim Anlegen eines Issues automatisch erzeugte Labels sind grau und ohne Beschreibung.
+      else if (alt.color === 'ededed' && !alt.description) {
+        await github.rest.issues.updateLabel({ owner, repo, name: alt.name, color: label.color, description: label.description });
+      }
     }
   } catch (fehler) {
     core.warning(`Labels konnten nicht angelegt werden: ${fehler.message}`);
