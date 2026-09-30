@@ -1,0 +1,21 @@
+name: "🧩 Idee oder Aufgabe fürs Klassenprojekt"
+description: Schlag eine Verbesserung oder neue Aufgabe für das Automatisierungs-Wiki vor.
+labels: ["projekt"]
+body:
+  - type: textarea
+    id: idee
+    attributes:
+      label: Was soll gemacht werden?
+      placeholder: "z. B. Auf der Seite „Sensoren“ fehlt ein Abschnitt zu Ultraschallsensoren."
+    validations:
+      required: true
+  - type: textarea
+    id: warum
+    attributes:
+      label: Warum ist das sinnvoll?
+  - type: checkboxes
+    id: selbst
+    attributes:
+      label: Mitmachen
+      options:
+        - label: Ich würde das selbst übernehmen.

@@ -1,0 +1,81 @@
+name: Fortschritt & Webseite
+
+# Berechnet nach jeder Aktivität im Repository den Fortschritt der Klasse
+# (fortschritt.json) und veröffentlicht Anleitung + Live-Fortschritt auf GitHub Pages.
+# Einmalig nötig: Settings → Pages → Source: "GitHub Actions".
+
+on:
+  push:
+    branches: [main]
+  issues:
+    types: [opened, edited, reopened, closed, labeled]
+  issue_comment:
+    types: [created]
+  # pull_request_target läuft im Kontext von main und darf deshalb veröffentlichen.
+  # Es wird nie Code aus dem Pull Request ausgecheckt oder ausgeführt.
+  pull_request_target:
+    types: [opened, reopened, closed]
+    branches: [main]
+  # Reviews stößt der Mini-Workflow "Review-Signal" an (siehe review-signal.yml).
+  workflow_run:
+    workflows: [Review-Signal]
+    types: [completed]
+  # Sicherheitsnetz, z. B. für angenommene Einladungen (dafür gibt es kein Ereignis).
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+  pages: write
+  id-token: write
+
+# Immer nur ein Lauf gleichzeitig; ein wartender Lauf wird durch den neuesten ersetzt.
+concurrency:
+  group: fortschritt
+  cancel-in-progress: false
+
+jobs:
+  fortschritt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.veroeffentlichen.outputs.page_url }}fortschritt.html
+    steps:
+      - name: main auschecken
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Fortschritt berechnen
+        id: berechnen
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const berechnen = require('./.github/scripts/fortschritt.js');
+            await berechnen({ github, context, core });
+
+      - name: Webseite zusammenstellen
+        if: steps.berechnen.outputs.pages == 'true'
+        run: |
+          mkdir _site
+          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' ./ _site/
+
+      - name: GitHub Pages vorbereiten
+        if: steps.berechnen.outputs.pages == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Webseite hochladen
+        if: steps.berechnen.outputs.pages == 'true'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Veröffentlichen
+        if: steps.berechnen.outputs.pages == 'true'
+        id: veroeffentlichen
+        uses: actions/deploy-pages@v4

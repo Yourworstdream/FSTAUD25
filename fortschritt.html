@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FST AUD 25 · Live-Fortschritt</title>
+<meta name="description" content="Live-Übersicht: Wie weit ist jede:r in der Automatisierungsklasse FST AUD 25 mit Git und GitHub?">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('fstaud25.theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="assets/common.js" defer></script>
+<script src="assets/fortschritt.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="marke" href="./"><img src="assets/favicon.svg" alt="">FST AUD 25</a>
+  <span class="live" id="live" role="status" aria-live="polite"><span class="punkt"></span><b>LIVE</b><span id="live-text">verbinde …</span></span>
+  <div class="steuerung">
+    <label class="visuell-versteckt" for="sortierung">Sortierung</label>
+    <select id="sortierung" class="nur-normal">
+      <option value="fortschritt">Sortiert nach Fortschritt</option>
+      <option value="name">Sortiert nach Name</option>
+      <option value="aktiv">Zuletzt aktiv zuerst</option>
+    </select>
+    <a class="knopf klein-k nur-normal" href="./">📘 Anleitung</a>
+    <button class="knopf klein-k" type="button" id="beamer" title="Vollbild für Beamer oder Smartboard">⛶ Beamer-Modus</button>
+    <button class="icon-knopf nur-normal" type="button" data-thema-knopf title="Hell/Dunkel umschalten" aria-label="Hell/Dunkel umschalten"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+
+<main class="dash">
+  <div class="dash-titel">
+    <h1 id="titel">Live-Fortschritt der Klasse</h1>
+    <p id="untertitel">Wer hat welche Schritte auf GitHub schon geschafft?</p>
+  </div>
+
+  <div class="banner" id="banner" hidden></div>
+
+  <section class="kennzahlen" aria-label="Kennzahlen">
+    <div class="kennzahl">
+      <div class="label">📝 Angemeldet</div>
+      <div class="wert" id="k-angemeldet">–</div>
+      <div class="zusatz" id="k-angemeldet-zusatz">&nbsp;</div>
+    </div>
+    <div class="kennzahl">
+      <div class="label">📈 Fortschritt der Klasse</div>
+      <div class="wert" id="k-fortschritt">–</div>
+      <div class="balken"><span id="k-fortschritt-balken" data-key="klasse"></span></div>
+      <div class="zusatz" id="k-fortschritt-zusatz">&nbsp;</div>
+    </div>
+    <div class="kennzahl">
+      <div class="label">🌿 Pull Requests</div>
+      <div class="wert" id="k-prs">–</div>
+      <div class="zusatz" id="k-prs-zusatz">&nbsp;</div>
+    </div>
+    <div class="kennzahl">
+      <div class="label">👀 Reviews &amp; Kommentare</div>
+      <div class="wert" id="k-reviews">–</div>
+      <div class="zusatz" id="k-reviews-zusatz">&nbsp;</div>
+    </div>
+  </section>
+
+  <div class="dash-grid">
+    <section class="karten" id="karten" aria-label="Teilnehmende"></section>
+    <aside>
+      <div class="panel">
+        <h2>🧭 Schritte der Klasse</h2>
+        <ol class="trichter" id="trichter"></ol>
+      </div>
+      <div class="panel">
+        <h2>⚡ Live-Aktivität</h2>
+        <ul class="feed" id="feed"></ul>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<canvas class="konfetti" id="konfetti" hidden></canvas>
+
+</body>
+</html>
