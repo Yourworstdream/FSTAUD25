@@ -5,6 +5,7 @@ Das Klassen-Repository der Automatisierungsklasse **FST AUD 25**. Hier lernen wi
 | | |
 |---|---|
 | 📘 **Anleitung** | https://yourworstdream.github.io/FSTAUD25/ |
+| 🧒 **Ganz einfach erklärt** | https://yourworstdream.github.io/FSTAUD25/einfach.html |
 | 📊 **Live-Fortschritt** | https://yourworstdream.github.io/FSTAUD25/fortschritt.html |
 | 📝 **Anmelden** | [Anmelde-Issue öffnen](https://github.com/Yourworstdream/FSTAUD25/issues/new?template=anmeldung.yml) |
 | 🆘 **Hilfe** | [Hilfe-Issue öffnen](https://github.com/Yourworstdream/FSTAUD25/issues/new?template=hilfe.yml) |
@@ -27,6 +28,7 @@ Jeder Schritt wird automatisch erkannt und erscheint etwa eine Minute später au
 
 ```
 ├── index.html                 Anleitung (GitHub Pages)
+├── einfach.html               Dieselben Schritte, ganz einfach erklärt (mit QR-Code)
 ├── fortschritt.html           Live-Fortschritt aller 12 Plätze
 ├── assets/                    Design und JavaScript der Webseite
 ├── klasse.json                Klassenname, Anzahl Plätze, ausgeblendete Konten
