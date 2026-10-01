@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FST AUD 25 · Ganz einfach erklärt</title>
+<meta name="description" content="GitHub ganz einfach erklärt: Jeder Klick Schritt für Schritt – vom Konto bis zur eigenen Wiki-Seite.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/einfach.css">
+<script>try{var t=localStorage.getItem('fstaud25.theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="assets/common.js" defer></script>
+<script src="assets/einfach.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="marke" href="./"><img src="assets/favicon.svg" alt="">FST AUD 25</a>
+  <nav class="topnav" aria-label="Hauptnavigation">
+    <a href="einfach.html" aria-current="page">Ganz einfach</a>
+    <a href="./">Ausführliche Anleitung</a>
+    <a href="fortschritt.html">Live-Fortschritt</a>
+  </nav>
+  <button class="icon-knopf" type="button" data-thema-knopf title="Hell/Dunkel umschalten" aria-label="Hell/Dunkel umschalten"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+</header>
+
+<section class="e-kopf">
+  <div class="e-kopf-text">
+    <span class="badge">🧒 Ganz einfach erklärt</span>
+    <h1>GitHub Schritt für Schritt</h1>
+    <p class="lead">Immer nur einen Schritt: lesen, machen, abhaken. Du brauchst nur ein Handy oder einen Laptop und etwa 30&nbsp;Minuten.</p>
+    <div class="e-fortschritt" aria-live="polite">
+      <div class="e-fortschritt-text"><b id="anzahl-geschafft">0</b> von 8 Schritten geschafft</div>
+      <div class="e-balken"><span id="balken-geschafft"></span></div>
+    </div>
+  </div>
+  <figure class="qr-box">
+    <img src="assets/qr-einfach.svg" alt="QR-Code zu dieser Seite" width="180" height="180">
+    <figcaption><b>Diese Seite aufs Handy:</b> Kamera auf den Code halten.<br><span class="url">yourworstdream.github.io/FSTAUD25/einfach.html</span></figcaption>
+  </figure>
+</section>
+
+<main class="e-inhalt">
+
+  <section class="e-block" id="woerter">
+    <h2>Erst mal: 7 neue Wörter</h2>
+    <p>Auf GitHub ist fast alles auf Englisch. Diese 7 Wörter reichen für den Anfang:</p>
+    <div class="woerter">
+      <div class="wort"><span class="w-icon">📁</span><div><b>Repository</b><span>Unser gemeinsamer Klassen-Ordner im Internet. Da liegen alle Dateien.</span></div></div>
+      <div class="wort"><span class="w-icon">📌</span><div><b>Issue</b><span>Ein Zettel an der Pinnwand: eine Frage, eine Aufgabe oder eine Idee.</span></div></div>
+      <div class="wort"><span class="w-icon">🌿</span><div><b>Branch</b><span>Deine eigene Kopie zum Ausprobieren. Das Original bleibt heil.</span></div></div>
+      <div class="wort"><span class="w-icon">💾</span><div><b>Commit</b><span>Speichern. Dazu schreibst du einen kurzen Satz, was du geändert hast.</span></div></div>
+      <div class="wort"><span class="w-icon">📬</span><div><b>Pull Request</b><span>Du fragst: „Darf meine Änderung ins Original?“</span></div></div>
+      <div class="wort"><span class="w-icon">👀</span><div><b>Review</b><span>Jemand aus der Klasse schaut drüber und sagt: „Passt!“</span></div></div>
+      <div class="wort"><span class="w-icon">✅</span><div><b>Merge</b><span>Deine Änderung kommt ins Original. Fertig!</span></div></div>
+    </div>
+    <p class="ablauf" aria-label="Der Ablauf: Branch, Commit, Pull Request, Review, Merge">🌿 Kopie <span>→</span> 💾 Speichern <span>→</span> 📬 Fragen <span>→</span> 👀 Prüfen <span>→</span> ✅ Übernehmen</p>
+    <p class="mitte klein">Das ist immer derselbe Ablauf. Wenn du ihn einmal gemacht hast, kannst du ihn.</p>
+  </section>
+
+  <section class="e-block" id="vorher">
+    <h2>Das brauchst du</h2>
+    <ul class="brauche">
+      <li><span>📱</span>Handy oder Laptop <small>(Laptop ist bequemer)</small></li>
+      <li><span>📧</span>Deine E-Mail-Adresse <small>und Zugriff auf dein Postfach</small></li>
+      <li><span>🤝</span>Einen Partner aus der Klasse <small>Ihr prüft euch gegenseitig</small></li>
+      <li><span>⏱️</span>Etwa 30 Minuten</li>
+    </ul>
+  </section>
+
+  <!-- Schritt 0 -->
+  <section class="schritt" id="s0" data-schritt="0" style="--farbe:#64748b">
+    <div class="s-kopf">
+      <span class="s-nr">0</span>
+      <div><span class="s-chip">🔑 Vorbereitung</span><h2>GitHub-Konto erstellen</h2></div>
+      <button class="geschafft" type="button" aria-pressed="false"><span class="g-box" aria-hidden="true"></span>Geschafft</button>
+    </div>
+    <p class="s-ziel"><b>Darum geht's:</b> Ohne Konto kannst du nicht mitmachen. Das Konto ist kostenlos.</p>
+    <ol class="klicks">
+      <li>Öffne <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup&nbsp;↗</a>.</li>
+      <li>Trag deine <b>E-Mail-Adresse</b> und ein <b>Passwort</b> ein.</li>
+      <li>Denk dir einen <b>Benutzernamen</b> aus. Das ist dein Name auf GitHub. Erlaubt sind Buchstaben, Zahlen und Bindestriche.<br><span class="merken">✏️ Schreib dir den Benutzernamen auf! Du brauchst ihn gleich.</span></li>
+      <li>Klick auf <span class="gh-btn gruen">Continue</span> bzw. <span class="gh-btn gruen">Create account</span>.</li>
+      <li>Löse das kleine Bilder-Rätsel.</li>
+      <li>Schau in dein E-Mail-Postfach. GitHub schickt dir einen <b>Code</b>. Tipp ihn ein.</li>
+      <li>Wenn GitHub Fragen stellt: Du kannst sie überspringen (<span class="gh-btn">Skip</span>). Wenn es nach einem Plan fragt: Nimm <b>Free</b> (kostenlos).</li>
+    </ol>
+    <p class="fertig">✅ <b>Fertig, wenn</b> du oben rechts auf GitHub dein Profilbild siehst.</p>
+    <div class="tipp">
+      <b>🔒 Gut zu wissen:</b> Irgendwann will GitHub einen Zusatz-Schutz (<i>Zwei-Faktor</i>, „2FA“). Dafür brauchst du eine App auf dem Handy, z.&nbsp;B. <i>Microsoft Authenticator</i> oder <i>Google Authenticator</i>. Folge einfach den Anweisungen: QR-Code scannen, Zahl eintippen. Die <b>Notfall-Codes</b> (<i>recovery codes</i>) gut aufheben!
+    </div>
+    <div class="klappt-nicht">
+      <b>😕 Klappt nicht?</b>
+      <ul>
+        <li>Keine E-Mail da? Schau im <b>Spam-Ordner</b> nach.</li>
+        <li>Benutzername schon vergeben? Nimm einen anderen, z.&nbsp;B. mit einer Zahl dahinter.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Schritt 1 -->
+  <section class="schritt" id="s1" data-schritt="1" style="--farbe:#6366f1">
+    <div class="s-kopf">
+      <span class="s-nr">1</span>
+      <div><span class="s-chip">📝 Meilenstein „Angemeldet“</span><h2>Für die Klasse anmelden</h2></div>
+      <button class="geschafft" type="button" aria-pressed="false"><span class="g-box" aria-hidden="true"></span>Geschafft</button>
+    </div>
+    <p class="s-ziel"><b>Darum geht's:</b> So weiß @Yourworstdream, dass du mitmachst, und kann dich einladen.</p>
+    <ol class="klicks">
+      <li>Klick hier: <a class="knopf primaer" href="./#anmeldung">📝 Zum Anmelde-Formular</a></li>
+      <li>Schreib deinen <b>Vornamen</b> und den <b>ersten Buchstaben</b> vom Nachnamen. Beispiel: <code>Max M.</code></li>
+      <li>Schreib deinen <b>GitHub-Benutzernamen</b> dazu.</li>
+      <li>Klick auf <span class="gh-btn">Anmeldung auf GitHub öffnen ↗</span>.</li>
+      <li>GitHub geht auf. Alles ist schon ausgefüllt. Hake das Kästchen bei den Teamregeln an.</li>
+      <li>Klick unten auf den grünen Knopf <span class="gh-btn gruen">Create</span>.</li>
+    </ol>
+    <p class="fertig">✅ <b>Fertig, wenn</b> du die Seite „Anmeldung: Dein Name“ siehst. Auf dem <a href="fortschritt.html">Live-Fortschritt</a> erscheint deine Karte mit 📝.</p>
+    <div class="tipp achtung">
+      <b>⚠️ Wichtig:</b> Das Repository ist öffentlich. Jeder im Internet kann es lesen. Darum nur <b>Vorname + ein Buchstabe</b>. Keine Adresse, keine Telefonnummer.
+    </div>
+  </section>
+
+  <!-- Schritt 2 -->
+  <section class="schritt" id="s2" data-schritt="2" style="--farbe:#0ea5e9">
+    <div class="s-kopf">
+      <span class="s-nr">2</span>
+      <div><span class="s-chip">🤝 Meilenstein „Im Team“</span><h2>Einladung annehmen</h2></div>
+      <button class="geschafft" type="button" aria-pressed="false"><span class="g-box" aria-hidden="true"></span>Geschafft</button>
+    </div>
+    <p class="s-ziel"><b>Darum geht's:</b> Erst mit der Einladung darfst du im Klassen-Ordner mitarbeiten.</p>
+    <ol class="klicks">
+      <li>Warte kurz. @Yourworstdream lädt dich ein. Das kann ein paar Minuten dauern.</li>
+      <li>Schau in dein E-Mail-Postfach. Die E-Mail heißt ungefähr so: <i>„@Yourworstdream has invited you to collaborate on the Yourworstdream/FSTAUD25 repository“</i>.</li>
+      <li>Klick in der E-Mail auf <span class="gh-btn">View invitation</span>.</li>
+      <li>Klick auf den grünen Knopf <span class="gh-btn gruen">Accept invitation</span>.</li>
+    </ol>
+    <p class="abkuerzung">Keine E-Mail? Öffne direkt: <a href="https://github.com/Yourworstdream/FSTAUD25/invitations" data-repo="/invitations" target="_blank" rel="noopener">Einladung auf GitHub ↗</a></p>
+    <p class="fertig">✅ <b>Fertig, wenn</b> du die Dateien vom Klassen-Ordner siehst. Dein Anmelde-Zettel schließt sich dann von selbst.</p>
+    <div class="klappt-nicht">
+      <b>😕 Klappt nicht?</b>
+      <ul>
+        <li>GitHub zeigt dir einen Knopf <span class="gh-btn">Fork</span>? <b>Nicht klicken!</b> Dann hast du die Einladung noch nicht angenommen.</li>
+        <li>„Invitation not found“? Dann bist du noch nicht eingeladen. Sag @Yourworstdream Bescheid.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Schritt 3 -->
+  <section class="schritt" id="s3" data-schritt="3" style="--farbe:#10b981">
+    <div class="s-kopf">
+      <span class="s-nr">3</span>
+      <div><span class="s-chip">🌿 Meilenstein „Pull Request“</span><h2>Deinen Steckbrief schreiben</h2></div>
+      <button class="geschafft" type="button" aria-pressed="false"><span class="g-box" aria-hidden="true"></span>Geschafft</button>
+    </div>
+    <p class="s-ziel"><b>Darum geht's:</b> Du machst zum ersten Mal den ganzen Ablauf: Kopie 🌿 → Speichern 💾 → Fragen 📬. Dein Steckbrief ist eine kleine Datei über dich.</p>
+
+    <form class="mini-form" id="steckbrief-form" autocomplete="off">
+      <label>Dein GitHub-Benutzername
+        <input id="sb-login" name="login" placeholder="z. B. max-m" spellcheck="false" autocapitalize="off">
+      </label>
+      <label>Dein Name
+        <input id="sb-name" name="name" placeholder="z. B. Max M.">
+      </label>
+    </form>
+
+    <ol class="klicks">
+      <li class="nur-bildschirm">Schreib oben deinen <b>Benutzernamen</b> und deinen <b>Namen</b> hinein.</li>
+      <li class="nur-bildschirm">Klick hier: <a class="knopf primaer" id="sb-link" href="https://github.com/Yourworstdream/FSTAUD25/new/main/teilnehmer" target="_blank" rel="noopener">📄 Meinen Steckbrief öffnen ↗</a><br>
+        <span class="klein" id="sb-hinweis">GitHub macht eine neue Datei auf. Name und Text sind schon drin.</span></li>
+      <li class="nur-druck">Öffne den Klassen-Ordner: <b>github.com/Yourworstdream/FSTAUD25</b>. Klick auf den Ordner <b>teilnehmer</b>.<br><span class="klein">Einfacher geht's auf der Webseite (QR-Code oben): Dort füllt ein Knopf alles für dich aus.</span></li>
+      <li class="nur-druck">Klick auf <span class="gh-btn">Add file</span> → <span class="gh-btn">Create new file</span>.</li>
+      <li class="nur-druck">Als Dateiname schreibst du deinen Benutzernamen mit <code>.md</code> am Ende, z.&nbsp;B. <code>max-m.md</code>. In die Datei kommt:
+<pre># Max M.
+
+- **Emoji:** 🤖
+- **Das will ich lernen:** Mit Git und GitHub im Team arbeiten
+- **Lieblingsthema in der Automatisierung:** SPS-Programmierung</pre></li>
+      <li>Ändere den Text so, wie du willst: dein Name, dein Emoji, was du lernen willst, dein Lieblingsthema.</li>
+      <li>Klick oben rechts auf den grünen Knopf <span class="gh-btn gruen">Commit changes…</span>.</li>
+      <li>Ein Fenster geht auf. Wähle unten:<br><span class="auswahl">◉ Create a new branch for this commit and start a pull request</span></li>
+      <li>Klick auf <span class="gh-btn gruen">Propose changes</span>.</li>
+      <li>Eine neue Seite geht auf. Rechts steht <b>Reviewers</b>. Klick dort auf das Zahnrad ⚙️ und such deinen <b>Partner</b> aus.</li>
+      <li>Klick auf den grünen Knopf <span class="gh-btn gruen">Create pull request</span>.</li>
+    </ol>
+    <p class="fertig">✅ <b>Fertig, wenn</b> oben ein grünes <span class="status offen">Open</span> steht. Auf dem Live-Fortschritt leuchtet 🌿.</p>
+    <div class="klappt-nicht">
+      <b>😕 Klappt nicht?</b>
+      <ul>
+        <li>Da steht <span class="gh-btn">Fork this repository</span>? Dann fehlt Schritt&nbsp;2 (Einladung annehmen).</li>
+        <li>Der Dateiname muss <b>genau</b> dein Benutzername sein, mit <code>.md</code> am Ende. Beispiel: <code>max-m.md</code></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Schritt 4 -->
+  <section class="schritt" id="s4" data-schritt="4" style="--farbe:#22c55e">
+    <div class="s-kopf">
+      <span class="s-nr">4</span>
+      <div><span class="s-chip">✅ Meilenstein „Gemerged“</span><h2>Prüfen lassen und übernehmen</h2></div>
+      <button class="geschafft" type="button" aria-pressed="false"><span class="g-box" aria-hidden="true"></span>Geschafft</button>
+    </div>
+    <p class="s-ziel"><b>Darum geht's:</b> Bevor etwas ins Original kommt, schaut eine zweite Person drüber. Danach übernimmst du deine Änderung (<i>Merge</i>).</p>
+    <ol class="klicks">
+      <li>Sag deinem Partner: „Kannst du meinen Pull Request prüfen?“ (Dein Partner macht dafür Schritt&nbsp;5.)</li>
+      <li>Warte, bis dein Partner <b>Approve</b> gegeben hat. Das heißt: „Passt!“ Du siehst dann ein grünes Häkchen ✔ mit <i>approved</i>.</li>
+      <li>Öffne deinen Pull Request: oben auf <span class="gh-btn">Pull requests</span> klicken und dann deinen anklicken.</li>
+      <li>Scroll ganz nach unten. Klick auf <span class="gh-btn gruen">Merge pull request</span>.</li>
+      <li>Klick auf <span class="gh-btn gruen">Confirm merge</span>.</li>
+      <li>Klick auf <span class="gh-btn">Delete branch</span>. Die Kopie brauchst du nicht mehr.</li>
+    </ol>
+    <p class="fertig">✅ <b>Fertig, wenn</b> oben ein lila <span class="status merged">Merged</span> steht. 🎉 Auf dem Live-Fortschritt leuchtet ✅.</p>
+    <div class="klappt-nicht">
+      <b>😕 Klappt nicht?</b>
+      <ul>
+        <li>Der Merge-Knopf ist grau? Dann fehlt noch das <b>Approve</b> von deinem Partner.</li>
+        <li>Dein Partner will, dass du etwas änderst (<i>Changes requested</i>)? Im Pull Request auf <span class="gh-btn">Files changed</span> → bei deiner Datei auf <b>⋯</b> → <span class="gh-btn">Edit file</span>. Ändern, dann <span class="gh-btn gruen">Commit changes…</span>. Der Pull Request passt sich von selbst an.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Schritt 5 -->
+  <section class="schritt" id="s5" data-schritt="5" style="--farbe:#f59e0b">
+    <div class="s-kopf">
+      <span class="s-nr">5</span>
+      <div><span class="s-chip">👀 Meilenstein „Review“</span><h2>Selbst prüfen</h2></div>
+      <button class="geschafft" type="button" aria-pressed="false"><span class="g-box" aria-hidden="true"></span>Geschafft</button>
+    </div>
+    <p class="s-ziel"><b>Darum geht's:</b> Jetzt bist du der Prüfer für deinen Partner. Vier Augen sehen mehr als zwei.</p>
+    <ol class="klicks">
+      <li>Oben auf <span class="gh-btn">Pull requests</span> klicken. Den Pull Request von deinem Partner anklicken.</li>
+      <li>Klick auf <span class="gh-btn">Files changed</span>. <span class="gruen-text">Grün</span> heißt: neu. <span class="rot-text">Rot</span> heißt: gelöscht.</li>
+      <li>Lies alles in Ruhe. Stimmt der Dateiname? Gibt es Tippfehler?</li>
+      <li>Klick oben rechts auf den grünen Knopf <span class="gh-btn gruen">Review changes</span>. Bei manchen heißt er <span class="gh-btn gruen">Submit review</span>.</li>
+      <li>Schreib einen netten Satz. Beispiel: „Sieht gut aus! 👍“</li>
+      <li>Wähle <span class="auswahl">◉ Approve</span> und klick auf <span class="gh-btn gruen">Submit review</span>.</li>
+    </ol>
+    <p class="fertig">✅ <b>Fertig, wenn</b> im Pull Request steht: „<i>dein-name</i> approved these changes“. Auf dem Live-Fortschritt leuchtet 👀.</p>
+    <div class="tipp gut">
+      <b>🤝 Regel:</b> Immer freundlich. Erst loben, dann Tipps geben. Sag genau, was du meinst, z.&nbsp;B. „In Zeile 3 fehlt ein Buchstabe.“
+    </div>
+  </section>
+
+  <!-- Schritt 6 -->
+  <section class="schritt" id="s6" data-schritt="6" style="--farbe:#ec4899">
+    <div class="s-kopf">
+      <span class="s-nr">6</span>
+      <div><span class="s-chip">💬 Meilenstein „Diskussion“</span><h2>Mitreden</h2></div>
+      <button class="geschafft" type="button" aria-pressed="false"><span class="g-box" aria-hidden="true"></span>Geschafft</button>
+    </div>
+    <p class="s-ziel"><b>Darum geht's:</b> In den <i>Issues</i> (Pinnwand-Zetteln) reden wir über Aufgaben und Ideen.</p>
+    <ol class="klicks">
+      <li>Oben auf <a href="https://github.com/Yourworstdream/FSTAUD25/issues" data-repo="/issues" target="_blank" rel="noopener">Issues ↗</a> klicken.</li>
+      <li>Ein Thema anklicken, z.&nbsp;B. „Thema 03: Sensoren in der Automatisierung“.</li>
+      <li>Ganz unten ins Textfeld schreiben. Beispiel: „Spannend! Induktive Sensoren kenne ich aus dem Betrieb.“</li>
+      <li>Klick auf <span class="gh-btn gruen">Comment</span>.</li>
+    </ol>
+    <p class="fertig">✅ <b>Fertig, wenn</b> dein Kommentar unter dem Thema steht. Auf dem Live-Fortschritt leuchtet 💬.</p>
+    <div class="tipp">
+      <b>💡 Trick:</b> Schreib <code>@</code> und einen Benutzernamen, z.&nbsp;B. <code>@max-m</code>. Dann bekommt die Person eine Nachricht.
+    </div>
+  </section>
+
+  <!-- Schritt 7 -->
+  <section class="schritt" id="s7" data-schritt="7" style="--farbe:#8b5cf6">
+    <div class="s-kopf">
+      <span class="s-nr">7</span>
+      <div><span class="s-chip">🚀 Meilenstein „Projekt“</span><h2>Eine Wiki-Seite schreiben</h2></div>
+      <button class="geschafft" type="button" aria-pressed="false"><span class="g-box" aria-hidden="true"></span>Geschafft</button>
+    </div>
+    <p class="s-ziel"><b>Darum geht's:</b> Zusammen schreiben wir ein Nachschlagewerk zur Automatisierungstechnik. 12 Themen für 12 Leute. Du schreibst eine Seite.</p>
+    <ol class="klicks">
+      <li>Öffne die <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+is%3Aopen+label%3Athema" data-repo="/issues?q=is%3Aissue+is%3Aopen+label%3Athema" target="_blank" rel="noopener">Themen-Liste ↗</a>. Such dir ein Thema aus, das noch <b>frei</b> ist (rechts noch kein Profilbild).</li>
+      <li>Öffne das Thema. Schreib als Kommentar: „Ich übernehme das“ und klick auf <span class="gh-btn gruen">Comment</span>.</li>
+      <li>Rechts bei <b>Assignees</b> auf <b>assign yourself</b> klicken. Jetzt ist es dein Thema.</li>
+      <li>Im Thema steht genau, was auf deine Seite gehört. Klick dort auf <span class="gh-btn">📄 Datei … anlegen ↗</span>.</li>
+      <li>Kopiere den Text aus der <a href="https://github.com/Yourworstdream/FSTAUD25/blob/main/projekt/VORLAGE.md" data-repo="/blob/main/projekt/VORLAGE.md" target="_blank" rel="noopener">Vorlage ↗</a> hinein und schreib deine Seite.</li>
+      <li>Jetzt wie bei Schritt&nbsp;3: <span class="gh-btn gruen">Commit changes…</span> → <span class="auswahl">◉ Create a new branch …</span> → <span class="gh-btn gruen">Propose changes</span> → Partner bei <b>Reviewers</b> eintragen. In die Beschreibung schreibst du <code>Closes #</code> und die Nummer von deinem Thema (steht im Thema). Dann <span class="gh-btn gruen">Create pull request</span>.</li>
+      <li>Jetzt wie bei Schritt&nbsp;4: Prüfen lassen und <span class="gh-btn gruen">Merge pull request</span>.</li>
+    </ol>
+    <p class="fertig">✅ <b>Fertig, wenn</b> deine Seite gemerged ist. Auf dem Live-Fortschritt leuchtet 🚀. <b>Du hast alle 7 Meilensteine geschafft! 🏆</b></p>
+  </section>
+
+  <section class="e-block hilfe" id="hilfe">
+    <h2>🆘 Hilfe! Es klappt nicht</h2>
+    <dl>
+      <dt>Ich finde einen Knopf nicht.</dt>
+      <dd>Am Handy sind manche Knöpfe versteckt. Dreh das Handy quer oder nimm den Laptop.</dd>
+      <dt>Ich habe etwas falsch gemacht.</dt>
+      <dd>Keine Panik! Git merkt sich jeden alten Stand. Es geht nichts verloren. Frag einfach nach.</dd>
+      <dt>Da steht „Conflict“.</dt>
+      <dd>Zwei Leute haben dieselbe Zeile geändert. Das ist normal. Hol dir Hilfe oder lies <a href="./#konflikte">Merge-Konflikte lösen</a>.</dd>
+      <dt>Ich komme gar nicht weiter.</dt>
+      <dd>Frag deinen Nachbarn oder @Yourworstdream. Oder schreib ein <a href="https://github.com/Yourworstdream/FSTAUD25/issues/new?template=hilfe.yml" data-repo="/issues/new?template=hilfe.yml" target="_blank" rel="noopener">🆘 Hilfe-Issue ↗</a>. Dann hilft dir die Klasse.</dd>
+    </dl>
+  </section>
+
+</main>
+
+<footer class="fusszeile">
+  FST AUD 25 · <a href="./">Ausführliche Anleitung</a> · <a href="fortschritt.html">Live-Fortschritt</a> · <a href="https://github.com/Yourworstdream/FSTAUD25" data-repo="" target="_blank" rel="noopener">Repository</a>
+</footer>
+
+</body>
+</html>
