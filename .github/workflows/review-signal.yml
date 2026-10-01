@@ -1,0 +1,20 @@
+name: Review-Signal
+
+# Reviews laufen im Kontext des Pull Requests und dürfen nicht direkt auf
+# GitHub Pages veröffentlichen. Dieser Mini-Workflow macht deshalb nichts weiter,
+# als "Fortschritt & Webseite" anzustoßen (über das Ereignis workflow_run).
+
+on:
+  pull_request_review:
+    types: [submitted, dismissed]
+  pull_request_review_comment:
+    types: [created]
+
+permissions: {}
+
+jobs:
+  signal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: echo "Review-Aktivität erkannt – der Fortschritt wird neu berechnet."

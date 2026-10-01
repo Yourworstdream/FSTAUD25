@@ -1,0 +1,6 @@
+# Wird von der Action erzeugt und nur auf GitHub Pages veröffentlicht
+fortschritt.json
+_site/
+
+.DS_Store
+Thumbs.db

@@ -1,0 +1,28 @@
+name: "🆘 Ich brauche Hilfe"
+description: Du hängst fest? Beschreib dein Problem – jemand aus der Klasse hilft dir.
+title: "Hilfe: "
+labels: ["hilfe"]
+body:
+  - type: dropdown
+    id: schritt
+    attributes:
+      label: Bei welchem Schritt hängst du?
+      options:
+        - 1 – Konto & Anmeldung
+        - 2 – Einladung annehmen
+        - 3 – Erster Pull Request
+        - 4 – Review & Merge
+        - 5 – Selbst reviewen
+        - 6 – Mitdiskutieren
+        - 7 – Klassenprojekt
+        - Git auf dem eigenen PC
+        - Etwas anderes
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Was ist passiert?
+      description: Was hast du gemacht, was hast du erwartet und welche Meldung kam? Ein Screenshot hilft oft sehr.
+    validations:
+      required: true
