@@ -1,58 +1,53 @@
-# ⚙️ FST AUD 25 – Gemeinsam auf GitHub
+# FST AUD 25
 
-Das Klassen-Repository der Automatisierungsklasse **FST AUD 25**. Hier lernen wir, mit Git und GitHub im Team zu arbeiten – und schreiben zusammen ein **Automatisierungs-Wiki**.
+Das gemeinsame GitHub-Repository der Automatisierungsklasse FST AUD 25. Hier üben wir, mit Git und GitHub im Team zu arbeiten, und schreiben zusammen ein kleines Wiki zur Automatisierungstechnik.
 
-| | |
-|---|---|
-| 📘 **Anleitung** | https://yourworstdream.github.io/FSTAUD25/ |
-| 🧒 **Ganz einfach erklärt** | https://yourworstdream.github.io/FSTAUD25/einfach.html |
-| 📊 **Live-Fortschritt** | https://yourworstdream.github.io/FSTAUD25/fortschritt.html |
-| 📝 **Anmelden** | [Anmelde-Issue öffnen](https://github.com/Yourworstdream/FSTAUD25/issues/new?template=anmeldung.yml) |
-| 🆘 **Hilfe** | [Hilfe-Issue öffnen](https://github.com/Yourworstdream/FSTAUD25/issues/new?template=hilfe.yml) |
-| 📄 **Lebenslauf-Generator** | [lebenslauf/](lebenslauf/) – Lebenslauf erstellen und als Word, LibreOffice oder interaktive Webseite exportieren |
+- Anleitung: https://yourworstdream.github.io/FSTAUD25/
+- Klassenliste: https://yourworstdream.github.io/FSTAUD25/fortschritt.html
+- Hilfe: https://yourworstdream.github.io/FSTAUD25/hilfe.html
+- Anmelden: [Anmelde-Formular öffnen](https://github.com/Yourworstdream/FSTAUD25/issues/new?template=anmeldung.yml)
+- Lebenslauf-Generator: [lebenslauf/](lebenslauf/) – Lebenslauf erstellen und als Word, LibreOffice oder Webseite exportieren
 
-## Dein Weg in 7 Schritten
+## Die sieben Schritte
 
-Jeder Schritt wird automatisch erkannt und erscheint etwa eine Minute später auf dem Live-Fortschritt.
-
-| # | Schritt | Was du tust | Woran er erkannt wird |
-|---|---------|-------------|------------------------|
-| 1 | 📝 Angemeldet | GitHub-Konto erstellen, Anmelde-Formular abschicken | Issue mit Label `anmeldung` |
-| 2 | 🤝 Im Team | Einladung per E-Mail annehmen | Du bist Collaborator |
-| 3 | 🌿 Pull Request | Steckbrief `teilnehmer/<dein-login>.md` per PR vorschlagen | Eigener PR |
-| 4 | ✅ Gemerged | Review bekommen, PR mergen | Eigener PR wurde gemerged |
-| 5 | 👀 Review | PR einer anderen Person prüfen | Abgeschicktes Review |
-| 6 | 💬 Diskussion | In einem Issue mitreden | Issue oder Kommentar |
-| 7 | 🚀 Projekt | Seite fürs Automatisierungs-Wiki schreiben | Gemergter PR in `projekt/` |
+| Nr. | Schritt | Wird erkannt an |
+|-----|---------|-----------------|
+| 1 | Konto erstellen und anmelden | Issue mit dem Label `anmeldung` |
+| 2 | Einladung annehmen | Du bist Collaborator |
+| 3 | Steckbrief vorschlagen | Eigener Pull Request |
+| 4 | Review abwarten und mergen | Eigener Pull Request wurde gemerged |
+| 5 | Einen Pull Request prüfen | Abgeschicktes Review bei jemand anderem |
+| 6 | In einem Issue mitreden | Eigenes Issue oder Kommentar |
+| 7 | Eine Wiki-Seite schreiben | Gemergter Pull Request im Ordner `projekt/` |
 
 ## Aufbau
 
 ```
-├── index.html                 Anleitung (GitHub Pages)
-├── einfach.html               Dieselben Schritte, ganz einfach erklärt (mit QR-Code)
-├── fortschritt.html           Live-Fortschritt aller 12 Plätze
-├── assets/                    Design und JavaScript der Webseite
-├── klasse.json                Klassenname, Anzahl Plätze, ausgeblendete Konten
-├── teilnehmer/                Ein Steckbrief pro Person (Schritt 3)
-├── projekt/                   Klassenprojekt: Automatisierungs-Wiki (Schritt 7)
-├── lebenslauf/                Lebenslauf-Generator (Python) – Export als Word, ODT, interaktive Webseite
-├── CONTRIBUTING.md            Unsere Teamregeln
-└── .github/
-    ├── ISSUE_TEMPLATE/        Formulare: Anmeldung, Hilfe, Idee
-    ├── scripts/fortschritt.js Berechnet den Fortschritt aus der GitHub-Aktivität
-    └── workflows/             Aktualisiert und veröffentlicht die Webseite
+index.html          Anleitung
+fortschritt.html    Klassenliste mit dem Stand aller 12 Plätze
+hilfe.html          Häufige Probleme, Begriffe, Regeln
+assets/             CSS und JavaScript der Seiten
+klasse.json         Klassenname, Anzahl Plätze, ausgeblendete Konten
+teilnehmer/         Ein Steckbrief pro Person (Schritt 3)
+projekt/            Das Wiki (Schritt 7)
+lebenslauf/         Lebenslauf-Generator (Python): Export als Word, ODT und interaktive Webseite
+.github/            Formulare, Actions, Skript und Tests für die Klassenliste
 ```
 
-## So funktioniert der Live-Fortschritt
+## Wie die Klassenliste funktioniert
 
-Nach jeder Aktivität (Issue, Kommentar, Pull Request, Review, Push auf `main`) und zusätzlich alle 10 Minuten läuft die Action **Fortschritt & Webseite**. Sie liest die Aktivität im Repository über die GitHub-API, berechnet für jede Person die 7 Schritte, schreibt `fortschritt.json` und veröffentlicht alles auf GitHub Pages. `fortschritt.html` lädt diese Datei alle 20 Sekunden neu und zeigt neue Erfolge sofort an. Mit `fortschritt.html?demo` gibt es eine Vorschau mit Beispieldaten, mit `fortschritt.html?ich=<login>` wird die eigene Karte hervorgehoben.
+Nach jeder Aktivität im Repository (Issue, Kommentar, Pull Request, Review, Push auf `main`) und zusätzlich regelmäßig nach Zeitplan läuft die Action *Fortschritt & Webseite*. Sie liest die Aktivität über die GitHub-API, berechnet für jede Person die sieben Schritte, schreibt `fortschritt.json` und veröffentlicht die Seiten auf GitHub Pages. `fortschritt.html` lädt die Datei alle 20 Sekunden neu. Geplante Läufe führt GitHub bei wenig Betrieb oft nur alle paar Stunden aus; das betrifft vor allem das Häkchen „Einladung“, weil GitHub für eine angenommene Einladung kein Ereignis an Actions schickt. Deshalb schreibt man nach dem Annehmen „angenommen“ in sein Anmelde-Issue: Der Kommentar startet die Action sofort, sie schließt das Issue und setzt das Häkchen.
 
-Nebenbei begrüßt die Action neue Anmeldungen und schließt Anmelde-Issues automatisch, sobald die Einladung angenommen wurde.
+Außerdem beantwortet die Action neue Anmeldungen mit den nächsten Schritten und schließt das Anmelde-Issue, sobald die Einladung angenommen wurde.
+
+`fortschritt.html?demo` zeigt die Liste mit Testdaten, `fortschritt.html?ich=<login>` hebt die eigene Zeile hervor.
+
+Das Skript hat Tests: `node --test .github/scripts/fortschritt.test.js`. Sie laufen automatisch, wenn ein Pull Request etwas in `.github/scripts/` ändert.
 
 ## Einrichtung (einmalig, für @Yourworstdream)
 
-1. **Pages einschalten:** Settings → Pages → *Build and deployment* → Source: **GitHub Actions**.
-2. **Einmal starten:** Actions → *Fortschritt & Webseite* → **Run workflow**. Danach ist die Seite unter https://yourworstdream.github.io/FSTAUD25/ erreichbar.
-3. **`main` schützen:** Settings → Rules → Rulesets → *New branch ruleset* → Target: *Include default branch* → **Restrict deletions**, **Require a pull request before merging** (1 Approval), **Block force pushes**.
-4. **Aufräumen:** Settings → General → *Automatically delete head branches* anhaken.
-5. **Einladen:** Für jedes Anmelde-Issue unter Settings → Collaborators → *Add people* den Benutzernamen eintragen.
+1. Settings → Pages → *Build and deployment* → Source: **GitHub Actions**.
+2. Actions → *Fortschritt & Webseite* → **Run workflow**. Danach ist die Seite unter https://yourworstdream.github.io/FSTAUD25/ erreichbar.
+3. Settings → Rules → Rulesets → *New branch ruleset*, Target: *Include default branch*, dann **Restrict deletions**, **Require a pull request before merging** (1 Approval) und **Block force pushes** anhaken.
+4. Settings → General → *Automatically delete head branches* anhaken.
+5. Für jede neue Anmeldung unter Settings → Collaborators → *Add people* den Benutzernamen eintragen.

@@ -1,5 +1,5 @@
-name: "🆘 Ich brauche Hilfe"
-description: Du hängst fest? Beschreib dein Problem – jemand aus der Klasse hilft dir.
+name: "Ich brauche Hilfe"
+description: Du kommst nicht weiter? Beschreib kurz das Problem.
 title: "Hilfe: "
 labels: ["hilfe"]
 body:
@@ -23,6 +23,6 @@ body:
     id: problem
     attributes:
       label: Was ist passiert?
-      description: Was hast du gemacht, was hast du erwartet und welche Meldung kam? Ein Screenshot hilft oft sehr.
+      description: Was hast du gemacht und welche Meldung kam? Ein Screenshot hilft.
     validations:
       required: true

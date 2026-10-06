@@ -1,11 +1,11 @@
-# 📚 Automatisierungs-Wiki der FST AUD 25
+# Automatisierungs-Wiki der FST AUD 25
 
 Unser gemeinsames Nachschlagewerk zur Automatisierungstechnik. 12 Themen für 12 Leute – jede:r schreibt eine Seite im Ordner [`themen/`](themen/).
 
 ## So machst du mit
 
 1. **Thema reservieren:** Öffne das passende [Themen-Issue](https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+label%3Athema), schreib „Ich übernehme das“ und trag dich unter *Assignees* ein.
-2. **Seite anlegen:** Kopiere die [Vorlage](VORLAGE.md) nach `projekt/themen/<nr>-<thema>.md`, z. B. `03-sensoren.md`.
+2. **Seite anlegen:** Im Themen-Issue auf den Link zum Anlegen der Datei klicken und den Inhalt der [Vorlage](VORLAGE.md) hineinkopieren.
 3. **Branch + Pull Request:** Branch z. B. `thema/03-sensoren`, im PR `Closes #<Issue-Nummer>` schreiben.
 4. **Hier eintragen:** Trag im selben Branch deinen Namen und den Link in die Tabelle unten ein. Weil das alle machen, gibt es hier gern einen Merge-Konflikt – [so löst du ihn](https://yourworstdream.github.io/FSTAUD25/#konflikte).
 5. **Review & Merge.**

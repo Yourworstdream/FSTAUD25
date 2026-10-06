@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hilfe · FST AUD 25</title>
+<meta name="description" content="Häufige Probleme, Begriffe und Regeln für das GitHub-Repository der FST AUD 25.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/common.js" defer></script>
+</head>
+<body>
+
+<header class="kopf">
+  <div class="kopf-innen">
+    <a class="seitenname" href="./">FST AUD 25</a>
+    <nav aria-label="Seiten">
+      <a href="./">Anleitung</a>
+      <a href="fortschritt.html">Fortschritt</a>
+      <a href="hilfe.html" aria-current="page">Hilfe</a>
+      <a href="https://github.com/Yourworstdream/FSTAUD25" data-repo="">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>Hilfe</h1>
+  <p>Hier steht alles zum Nachschlagen. Du musst das nicht durchlesen, um mitzumachen. Wenn du nicht weiterkommst, frag in der Klasse oder schreib ein <a href="https://github.com/Yourworstdream/FSTAUD25/issues/new?template=hilfe.yml" data-repo="/issues/new?template=hilfe.yml">Hilfe-Issue</a>.</p>
+
+  <h2>Häufige Probleme</h2>
+  <details>
+    <summary>Ich habe keine Einladung bekommen.</summary>
+    <p>Schau im Spam-Ordner nach oder öffne direkt die <a href="https://github.com/Yourworstdream/FSTAUD25/invitations" data-repo="/invitations">Einladungsseite</a>. Steht dort nichts, wurdest du noch nicht eingeladen. Prüf dann, ob deine Anmeldung bei den <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=label%3Aanmeldung" data-repo="/issues?q=label%3Aanmeldung">Anmeldungen</a> auftaucht.</p>
+  </details>
+  <details>
+    <summary>GitHub will, dass ich das Repository „forke“.</summary>
+    <p>Dann hast du die Einladung noch nicht angenommen (Schritt 2). Nicht forken, sondern erst die Einladung annehmen und die Seite neu laden.</p>
+  </details>
+  <details>
+    <summary>Ich kann nicht mergen, da steht „Review required“.</summary>
+    <p>Das ist so gewollt. Erst muss eine andere Person deinen Pull Request mit <b>Approve</b> freigeben.</p>
+  </details>
+  <details>
+    <summary>Ich habe einen Fehler im Pull Request.</summary>
+    <p>Kein Problem. Öffne im Pull Request <b>Files changed</b>, klick bei der Datei auf die drei Punkte und dann auf <b>Edit file</b>. Speicher die Änderung im selben Branch. Der Pull Request aktualisiert sich von selbst.</p>
+  </details>
+  <details>
+    <summary>Ich habe aus Versehen etwas Falsches gemerged.</summary>
+    <p>Bei Git geht nichts verloren. Im gemergten Pull Request gibt es unten den Knopf <b>Revert</b>. Er erstellt einen neuen Pull Request, der die Änderung rückgängig macht.</p>
+  </details>
+  <details>
+    <summary>Mein Häkchen in der Klassenliste fehlt.</summary>
+    <p>Die Liste aktualisiert sich etwa eine Minute nach jeder Aktion auf GitHub. Das Annehmen der Einladung meldet GitHub nicht von selbst. Schreib deshalb in dein Anmelde-Issue „angenommen“, dann kommt das Häkchen sofort. Sonst erscheint es spätestens mit deinem ersten Pull Request. Prüf außerdem, ob deine Steckbrief-Datei genauso heißt wie dein Benutzername.</p>
+  </details>
+  <details>
+    <summary>Da steht „This branch has conflicts“.</summary>
+    <p>Siehe <a href="#konflikt">Merge-Konflikt lösen</a> weiter unten.</p>
+  </details>
+
+  <h2>Begriffe</h2>
+  <dl class="begriffe">
+    <dt>Repository</dt><dd>Der Projektordner mit allen Dateien und ihrer ganzen Geschichte.</dd>
+    <dt>Commit</dt><dd>Ein gespeicherter Zwischenstand mit einer kurzen Beschreibung.</dd>
+    <dt>Branch</dt><dd>Ein eigener Zweig, auf dem du arbeitest, ohne den Hauptstand zu verändern.</dd>
+    <dt>main</dt><dd>Der Hauptstand. Hier landet nur, was geprüft wurde.</dd>
+    <dt>Pull Request</dt><dd>Der Vorschlag, die Änderungen aus deinem Branch in main zu übernehmen.</dd>
+    <dt>Review</dt><dd>Eine andere Person prüft deinen Pull Request.</dd>
+    <dt>Merge</dt><dd>Das Übernehmen eines Branches in main.</dd>
+    <dt>Issue</dt><dd>Ein Eintrag in der Aufgabenliste: Frage, Idee, Fehler oder Thema.</dd>
+  </dl>
+
+  <h2>Unsere Regeln</h2>
+  <ol>
+    <li>Nie direkt auf main arbeiten, immer Branch und Pull Request.</li>
+    <li>Ein Branch für ein Thema. Kleine Pull Requests sind schneller geprüft.</li>
+    <li>Commit-Nachrichten sagen, was sich geändert hat, also „Tippfehler in der PID-Formel korrigiert“ statt „update“.</li>
+    <li>Nur eigene Dateien bearbeiten, außer es ist abgesprochen.</li>
+    <li>Reviews sind freundlich und konkret.</li>
+    <li>Keine Passwörter oder privaten Daten ins Repository, es ist öffentlich.</li>
+  </ol>
+
+  <h2 id="konflikt">Merge-Konflikt lösen</h2>
+  <p>Ein Konflikt entsteht, wenn zwei Leute dieselbe Stelle einer Datei unterschiedlich geändert haben. Git weiß dann nicht, welche Version stimmt, und markiert die Stelle so:</p>
+  <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; thema/03-sensoren
+| 03 | Sensoren | Jonas M. |
+=======
+| 03 | Sensoren | Aylin S. |
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; main</code></pre>
+  <ol>
+    <li>Klick im Pull Request auf <b>Resolve conflicts</b>.</li>
+    <li>Lösch die drei Markierungszeilen (<code>&lt;&lt;&lt;</code>, <code>===</code>, <code>&gt;&gt;&gt;</code>) und lass stehen, was richtig ist. Manchmal sind das beide Zeilen.</li>
+    <li>Klick auf <b>Mark as resolved</b> und dann auf <b>Commit merge</b>.</li>
+  </ol>
+
+  <h2>Mit Git auf dem eigenen PC</h2>
+  <p>Das ist freiwillig, für die Schritte reicht der Browser. Am einfachsten geht es mit <a href="https://desktop.github.com/">GitHub Desktop</a>. Wer die Kommandozeile mag, <a href="https://git-scm.com/downloads">installiert Git</a> und arbeitet so:</p>
+  <pre><code>git clone https://github.com/Yourworstdream/FSTAUD25.git
+cd FSTAUD25
+git switch -c thema/03-sensoren   # neuen Branch anlegen
+# Dateien bearbeiten, dann:
+git add .
+git commit -m "Sensoren: Grundlagen ergänzt"
+git push -u origin thema/03-sensoren</code></pre>
+  <p>Danach erstellst du auf GitHub den Pull Request. Den neuesten Stand holst du mit <code>git switch main</code> und <code>git pull</code>.</p>
+
+  <p class="leise abstand">Die Einrichtung für den Admin steht in der <a href="https://github.com/Yourworstdream/FSTAUD25#readme" data-repo="#readme">README des Repositorys</a>.</p>
+</main>
+
+<footer class="fuss">
+  FST AUD 25 · <a href="./">Zur Anleitung</a>
+</footer>
+
+</body>
+</html>
