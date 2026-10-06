@@ -8,7 +8,7 @@
   const DEMO = params.has('demo');
   const ICH = (params.get('ich') || '').toLowerCase();
   const INTERVALL = DEMO ? 5000 : 20000;
-  const VERALTET_NACH = 45 * 60 * 1000;
+  const VERALTET_NACH = 24 * 60 * 60 * 1000; // GitHub startet geplante Läufe oft nur alle paar Stunden
   const HAKEN = '<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   const $ = (id) => document.getElementById(id);
@@ -102,7 +102,7 @@
         ? 'Diese Seite funktioniert nur online über GitHub Pages. <a href="fortschritt.html?demo">Beispiel ansehen</a>'
         : 'Die Daten konnten gerade nicht geladen werden. Die Seite versucht es gleich noch mal.';
     } else if (daten && daten.aktualisiert && Date.now() - new Date(daten.aktualisiert).getTime() > VERALTET_NACH) {
-      html = `Stand von ${escape(uhrzeit(daten.aktualisiert))} Uhr. Normalerweise wird die Liste spätestens alle 10 Minuten aktualisiert.`;
+      html = `Die Daten sind vom ${escape(uhrzeit(daten.aktualisiert))} Uhr. Ist seitdem etwas auf GitHub passiert, läuft die Action gerade nicht.`;
     }
     $('hinweis').innerHTML = html;
     $('hinweis').hidden = !html;
@@ -121,7 +121,8 @@
       el.textContent = 'noch keine Daten';
     } else if (daten && daten.aktualisiert) {
       const alt = Date.now() - new Date(daten.aktualisiert).getTime() > VERALTET_NACH;
-      el.textContent = `aktualisiert ${relativeZeit(daten.aktualisiert)}`;
+      el.textContent = `Stand ${uhrzeit(daten.aktualisiert)} Uhr`;
+      el.title = `aktualisiert ${relativeZeit(daten.aktualisiert)}, die Seite prüft alle ${INTERVALL / 1000} Sekunden`;
       el.classList.add(alt ? 'alt' : 'aktuell');
     }
   }
@@ -154,8 +155,9 @@
     statusZeigen();
   }
 
+  // Im Hintergrund-Tab nicht abrufen; beim Zurückkommen lädt visibilitychange sofort neu.
   function planen() {
-    setTimeout(() => aktualisieren().then(planen), INTERVALL);
+    setTimeout(() => (document.hidden ? Promise.resolve() : aktualisieren()).then(planen), INTERVALL);
   }
 
   document.addEventListener('visibilitychange', () => {

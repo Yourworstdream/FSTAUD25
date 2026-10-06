@@ -19,23 +19,6 @@
 - Lieblingsthema in der Automatisierung:
 `;
 
-  const themaVorlage = (name) => `# Titel deines Themas
-
-Geschrieben von ${name || 'deinem Namen'}
-
-## Worum geht es?
-
-Erkläre das Thema in zwei, drei Sätzen.
-
-## Wie funktioniert es?
-
-## Beispiel aus der Praxis
-
-## Quellen
-
--
-`;
-
   const neueDatei = (ordner, datei, inhalt) =>
     `${REPO_URL}/new/main/${ordner}?filename=${encodeURIComponent(datei)}&value=${encodeURIComponent(inhalt)}`;
 
@@ -52,7 +35,6 @@ Erkläre das Thema in zwei, drei Sätzen.
     const hatLogin = LOGIN_MUSTER.test(ich.login);
     document.querySelectorAll('[data-ich-login]').forEach((el) => { el.textContent = hatLogin ? ich.login : 'benutzername'; });
     $('steckbrief-link').href = neueDatei('teilnehmer', `${hatLogin ? ich.login : 'benutzername'}.md`, steckbrief(ich.name));
-    $('thema-link').href = neueDatei('projekt/themen', 'nr-thema.md', themaVorlage(ich.name));
     $('ich').hidden = !hatLogin;
     if (hatLogin) $('ich-link').href = `fortschritt.html?ich=${encodeURIComponent(ich.login)}`;
   }

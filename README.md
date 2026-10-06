@@ -34,7 +34,7 @@ projekt/            Das Wiki (Schritt 7)
 
 ## Wie die Klassenliste funktioniert
 
-Nach jeder Aktivität im Repository (Issue, Kommentar, Pull Request, Review, Push auf `main`) und zusätzlich alle 10 Minuten läuft die Action *Fortschritt & Webseite*. Sie liest die Aktivität über die GitHub-API, berechnet für jede Person die sieben Schritte, schreibt `fortschritt.json` und veröffentlicht die Seiten auf GitHub Pages. `fortschritt.html` lädt die Datei alle 20 Sekunden neu.
+Nach jeder Aktivität im Repository (Issue, Kommentar, Pull Request, Review, Push auf `main`) und zusätzlich regelmäßig nach Zeitplan läuft die Action *Fortschritt & Webseite*. Sie liest die Aktivität über die GitHub-API, berechnet für jede Person die sieben Schritte, schreibt `fortschritt.json` und veröffentlicht die Seiten auf GitHub Pages. `fortschritt.html` lädt die Datei alle 20 Sekunden neu. Geplante Läufe führt GitHub bei wenig Betrieb oft nur alle paar Stunden aus; das betrifft vor allem das Häkchen „Einladung“, das sonst spätestens mit dem ersten Pull Request kommt.
 
 Außerdem beantwortet die Action neue Anmeldungen mit den nächsten Schritten und schließt das Anmelde-Issue, sobald die Einladung angenommen wurde.
 

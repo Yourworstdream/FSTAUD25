@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GitHub-Anleitung · FST AUD 25</title>
 <meta name="description" content="In sieben Schritten ins gemeinsame GitHub-Repository der FST AUD 25.">
+<meta property="og:title" content="GitHub-Anleitung für die FST AUD 25">
+<meta property="og:description" content="In sieben Schritten ins gemeinsame GitHub-Repository. Du brauchst nur einen Browser.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/style.css">
 <script src="assets/common.js" defer></script>
@@ -26,6 +28,7 @@
 
 <main>
   <h1>GitHub-Anleitung für die FST AUD 25</h1>
+  <p class="nur-druck druck-kopf"><img src="assets/qr-anleitung.svg" alt="">Online mit allen Links und dem Anmeldeformular:<br>yourworstdream.github.io/FSTAUD25</p>
   <p>Wir arbeiten dieses Schuljahr gemeinsam in einem GitHub-Repository. Diese Seite bringt dich in sieben Schritten dorthin. Du brauchst nur einen Browser, rechne mit etwa 30 Minuten. Am besten suchst du dir einen Partner aus der Klasse, ihr prüft euch in Schritt 4 und 5 gegenseitig.</p>
 
   <ol class="uebersicht" id="uebersicht">
@@ -49,6 +52,7 @@
     <p>Falls du noch kein GitHub-Konto hast, registriere dich auf <a href="https://github.com/signup">github.com/signup</a>. Merk dir deinen Benutzernamen. GitHub verlangt eine Zwei-Faktor-Anmeldung, das geht am einfachsten mit einer Authenticator-App auf dem Handy.</p>
     <p>Dann trägst du dich hier ein. Danach öffnet sich GitHub mit einem fertig ausgefüllten Formular, dort klickst du nur noch auf <b>Create</b>.</p>
 
+    <p class="nur-druck">Das Formular dazu findest du auf der Online-Seite (QR-Code oben).</p>
     <form class="formular" id="anmelde-form" novalidate>
       <label>Name <span class="leise">(Vorname und erster Buchstabe vom Nachnamen, z.&nbsp;B. Max M.)</span>
         <input id="f-name" required maxlength="40" autocomplete="off">
@@ -59,6 +63,7 @@
       <p class="meldung" id="f-meldung" aria-live="polite" hidden></p>
       <button class="knopf" type="submit">Weiter zu GitHub</button>
     </form>
+    <noscript><p>Ohne JavaScript geht es direkt über das <a href="https://github.com/Yourworstdream/FSTAUD25/issues/new?template=anmeldung.yml">Anmelde-Formular auf GitHub</a>.</p></noscript>
 
     <div class="kasten" id="anmelde-erfolg" hidden>
       <p>GitHub wurde in einem neuen Tab geöffnet. Klick dort auf <b>Create</b>, dann bist du angemeldet. Kein neuer Tab? <a id="anmelde-link" href="#" target="_blank" rel="noopener">Formular hier öffnen</a>.</p>
@@ -72,7 +77,7 @@
     <h2>Einladung annehmen</h2>
     <p>Nach deiner Anmeldung lädt dich @Yourworstdream ins Repository ein. Du bekommst dazu eine E-Mail von GitHub. Schau auch im Spam-Ordner nach.</p>
     <p>Klick in der E-Mail auf <b>View invitation</b> und dann auf <b>Accept invitation</b>. Du kannst die Einladung auch <a href="https://github.com/Yourworstdream/FSTAUD25/invitations" data-repo="/invitations">direkt hier öffnen</a>. Sie gilt 7 Tage.</p>
-    <p class="fertig"><b>Fertig, wenn</b> dein Anmelde-Issue automatisch geschlossen wurde. Bietet dir GitHub später an, das Repository zu „forken“, ist die Einladung noch nicht angenommen.</p>
+    <p class="fertig"><b>Fertig, wenn</b> du nach dem Klick auf Accept invitation im Repository landest. Bietet dir GitHub später an, das Repository zu „forken“, ist die Einladung noch nicht angenommen.</p>
   </section>
 
   <section class="schritt" id="schritt-3">
@@ -118,7 +123,7 @@
     <p>Zusammen schreiben wir ein kleines Wiki zur Automatisierungstechnik. Es gibt 12 Themen, jede Person übernimmt eins.</p>
     <ol>
       <li>Such dir bei den <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+is%3Aopen+label%3Athema" data-repo="/issues?q=is%3Aissue+is%3Aopen+label%3Athema">Themen</a> ein freies aus, schreib „Ich übernehme das“ und trag dich rechts bei <b>Assignees</b> ein.</li>
-      <li>Leg die Seite mit der <a id="thema-link" href="https://github.com/Yourworstdream/FSTAUD25/new/main/projekt/themen">Vorlage</a> an und gib ihr einen Namen wie <code>03-sensoren.md</code>.</li>
+      <li>Klick im Themen-Issue auf <b>Seite anlegen</b>. Dateiname und Vorlage sind dort schon eingetragen.</li>
       <li>Weiter wie in Schritt 3 und 4: neuer Branch, Pull Request, Review, Merge. Schreib in den Pull Request <code>Closes #</code> und die Nummer deines Themen-Issues.</li>
     </ol>
     <p class="fertig"><b>Fertig, wenn</b> dein Pull Request mit der Wiki-Seite gemerged ist.</p>
