@@ -1,4 +1,4 @@
-# 📚 Automatisierungs-Wiki der FST AUD 25
+# Automatisierungs-Wiki der FST AUD 25
 
 Unser gemeinsames Nachschlagewerk zur Automatisierungstechnik. 12 Themen für 12 Leute – jede:r schreibt eine Seite im Ordner [`themen/`](themen/).
 

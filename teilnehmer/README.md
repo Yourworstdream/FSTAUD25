@@ -11,9 +11,8 @@ Hier legt jede Person aus der Klasse **eine** Datei an – das ist dein erster P
 ```markdown
 # Max M.
 
-- **Emoji:** 🤖
-- **Das will ich lernen:** Mit Git und GitHub im Team arbeiten
-- **Lieblingsthema in der Automatisierung:** SPS-Programmierung
+- Das will ich lernen: Mit Git und GitHub im Team arbeiten
+- Lieblingsthema in der Automatisierung: SPS-Programmierung
 ```
 
-Name und Emoji erscheinen auf deiner Karte im [Live-Fortschritt](https://yourworstdream.github.io/FSTAUD25/fortschritt.html).
+Dein Name erscheint dann so in der [Klassenliste](https://yourworstdream.github.io/FSTAUD25/fortschritt.html).

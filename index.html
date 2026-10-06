@@ -3,587 +3,134 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FST AUD 25 · GitHub-Anleitung</title>
-<meta name="description" content="Schritt-für-Schritt-Anleitung: So arbeitet die Automatisierungsklasse FST AUD 25 gemeinsam auf GitHub – Anmeldung, Pull Requests, Reviews und Klassenprojekt.">
+<title>GitHub-Anleitung · FST AUD 25</title>
+<meta name="description" content="In sieben Schritten ins gemeinsame GitHub-Repository der FST AUD 25.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/style.css">
-<script>try{var t=localStorage.getItem('fstaud25.theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <script src="assets/common.js" defer></script>
 <script src="assets/anleitung.js" defer></script>
 </head>
 <body>
 
-<header class="topbar">
-  <a class="marke" href="./"><img src="assets/favicon.svg" alt="">FST AUD 25</a>
-  <nav class="topnav" aria-label="Hauptnavigation">
-    <a href="./" aria-current="page">Anleitung</a>
-    <a href="einfach.html">Ganz einfach</a>
-    <a href="#anmeldung">Anmelden</a>
-    <a href="fortschritt.html">Live-Fortschritt</a>
-    <a href="https://github.com/Yourworstdream/FSTAUD25" data-repo="" target="_blank" rel="noopener">Repository ↗</a>
-  </nav>
-  <button class="icon-knopf" type="button" data-thema-knopf title="Hell/Dunkel umschalten" aria-label="Hell/Dunkel umschalten"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+<header class="kopf">
+  <div class="kopf-innen">
+    <a class="seitenname" href="./">FST AUD 25</a>
+    <nav aria-label="Seiten">
+      <a href="./" aria-current="page">Anleitung</a>
+      <a href="fortschritt.html">Fortschritt</a>
+      <a href="hilfe.html">Hilfe</a>
+      <a href="https://github.com/Yourworstdream/FSTAUD25" data-repo="">GitHub</a>
+    </nav>
+  </div>
 </header>
 
-<section class="hero">
-  <span class="badge">⚙️ Automatisierungsklasse · 12 Plätze</span>
-  <h1>Gemeinsam auf GitHub – so arbeitet die FST&nbsp;AUD&nbsp;25 im Team</h1>
-  <p class="lead">Melde dich an, mach deinen ersten Pull Request und bau mit der ganzen Klasse ein Automatisierungs-Wiki. Jeder Schritt wird automatisch erkannt und live angezeigt.</p>
-  <div class="knopf-reihe">
-    <a class="knopf primaer" href="#anmeldung">📝 Jetzt anmelden</a>
-    <a class="knopf" href="fortschritt.html">📊 Live-Fortschritt</a>
-    <a class="knopf" href="einfach.html">🧒 Ganz einfach erklärt</a>
-    <a class="knopf" href="#ueberblick">Anleitung lesen ↓</a>
+<main>
+  <h1>GitHub-Anleitung für die FST AUD 25</h1>
+  <p>Wir arbeiten dieses Schuljahr gemeinsam in einem GitHub-Repository. Diese Seite bringt dich in sieben Schritten dorthin. Du brauchst nur einen Browser, rechne mit etwa 30 Minuten. Am besten suchst du dir einen Partner aus der Klasse, ihr prüft euch in Schritt 4 und 5 gegenseitig.</p>
+
+  <ol class="uebersicht" id="uebersicht">
+    <li data-schritt="anmeldung"><a href="#schritt-1">Konto erstellen und anmelden</a></li>
+    <li data-schritt="team"><a href="#schritt-2">Einladung annehmen</a></li>
+    <li data-schritt="pr"><a href="#schritt-3">Steckbrief vorschlagen</a></li>
+    <li data-schritt="merge"><a href="#schritt-4">Review abwarten und mergen</a></li>
+    <li data-schritt="review"><a href="#schritt-5">Einen Pull Request prüfen</a></li>
+    <li data-schritt="diskussion"><a href="#schritt-6">In einem Issue mitreden</a></li>
+    <li data-schritt="projekt"><a href="#schritt-7">Eine Wiki-Seite schreiben</a></li>
+  </ol>
+
+  <div class="kasten" id="ich" hidden>
+    <p>Du bist als <b>@<span data-ich-login></span></b> eingetragen. <span id="ich-stand"></span></p>
+    <p class="leise"><a id="ich-link" href="fortschritt.html">Zur Klassenliste</a> · <a href="#schritt-1" id="ich-aendern">Anderen Namen eintragen</a></p>
   </div>
 
-  <div class="ich-leiste" id="ich-leiste" hidden>
-    <img id="ich-avatar" alt="">
-    <div>
-      <b>Hallo <span data-ich-name></span>!</b>
-      <div class="klein">Angemeldet als <b>@<span data-ich-login></span></b> · <span id="ich-stand">Dein Stand wird geladen …</span></div>
+  <section class="schritt" id="schritt-1">
+    <p class="schritt-nr">Schritt 1 von 7</p>
+    <h2>Konto erstellen und anmelden</h2>
+    <p>Falls du noch kein GitHub-Konto hast, registriere dich auf <a href="https://github.com/signup">github.com/signup</a>. Merk dir deinen Benutzernamen. GitHub verlangt eine Zwei-Faktor-Anmeldung, das geht am einfachsten mit einer Authenticator-App auf dem Handy.</p>
+    <p>Dann trägst du dich hier ein. Danach öffnet sich GitHub mit einem fertig ausgefüllten Formular, dort klickst du nur noch auf <b>Create</b>.</p>
+
+    <form class="formular" id="anmelde-form" novalidate>
+      <label>Name <span class="leise">(Vorname und erster Buchstabe vom Nachnamen, z.&nbsp;B. Max M.)</span>
+        <input id="f-name" required maxlength="40" autocomplete="off">
+      </label>
+      <label>GitHub-Benutzername
+        <input id="f-login" required maxlength="39" autocomplete="off" autocapitalize="off" spellcheck="false">
+      </label>
+      <p class="meldung" id="f-meldung" aria-live="polite" hidden></p>
+      <button class="knopf" type="submit">Weiter zu GitHub</button>
+    </form>
+
+    <div class="kasten" id="anmelde-erfolg" hidden>
+      <p>GitHub wurde in einem neuen Tab geöffnet. Klick dort auf <b>Create</b>, dann bist du angemeldet. Kein neuer Tab? <a id="anmelde-link" href="#" target="_blank" rel="noopener">Formular hier öffnen</a>.</p>
     </div>
-    <div class="knopf-reihe">
-      <a class="knopf klein-k" id="ich-fortschritt-link" href="fortschritt.html">Mein Fortschritt</a>
-      <button class="knopf klein-k" type="button" id="ich-aendern">Ändern</button>
-    </div>
-  </div>
-</section>
+    <p class="leise">Das Repository ist öffentlich. Deshalb bitte nur Vorname und Anfangsbuchstabe.</p>
+    <p class="fertig"><b>Fertig, wenn</b> du auf GitHub die Seite „Anmeldung: dein Name“ siehst.</p>
+  </section>
 
-<div class="layout">
-  <nav class="toc" aria-label="Inhalt">
-    <p>Inhalt</p>
-    <a href="#ueberblick">Überblick</a>
-    <div class="trenner"></div>
-    <a href="#schritt-1">1 · Konto &amp; Anmeldung</a>
-    <a href="#schritt-2">2 · Einladung annehmen</a>
-    <a href="#schritt-3">3 · Erster Pull Request</a>
-    <a href="#schritt-4">4 · Review &amp; Merge</a>
-    <a href="#schritt-5">5 · Selbst reviewen</a>
-    <a href="#schritt-6">6 · Mitdiskutieren</a>
-    <a href="#schritt-7">7 · Klassenprojekt</a>
-    <div class="trenner"></div>
-    <a href="#zusammenarbeit">So arbeiten wir zusammen</a>
-    <a href="#konflikte">Merge-Konflikte</a>
-    <a href="#lokal">Git auf dem eigenen PC</a>
-    <a href="#glossar">Glossar</a>
-    <a href="#hilfe">Hilfe &amp; FAQ</a>
-    <a href="#admin">Für den Admin</a>
-  </nav>
+  <section class="schritt" id="schritt-2">
+    <p class="schritt-nr">Schritt 2 von 7</p>
+    <h2>Einladung annehmen</h2>
+    <p>Nach deiner Anmeldung lädt dich @Yourworstdream ins Repository ein. Du bekommst dazu eine E-Mail von GitHub. Schau auch im Spam-Ordner nach.</p>
+    <p>Klick in der E-Mail auf <b>View invitation</b> und dann auf <b>Accept invitation</b>. Du kannst die Einladung auch <a href="https://github.com/Yourworstdream/FSTAUD25/invitations" data-repo="/invitations">direkt hier öffnen</a>. Sie gilt 7 Tage.</p>
+    <p class="fertig"><b>Fertig, wenn</b> dein Anmelde-Issue automatisch geschlossen wurde. Bietet dir GitHub später an, das Repository zu „forken“, ist die Einladung noch nicht angenommen.</p>
+  </section>
 
-  <main class="inhalt">
+  <section class="schritt" id="schritt-3">
+    <p class="schritt-nr">Schritt 3 von 7</p>
+    <h2>Steckbrief vorschlagen</h2>
+    <p>Am Hauptstand des Projekts (<code>main</code>) ändert niemand direkt etwas. Du machst deine Änderung auf einem eigenen Zweig, einem <b>Branch</b>, und schlägst sie dann vor. Dieser Vorschlag heißt <b>Pull Request</b>.</p>
+    <ol>
+      <li>Öffne die vorbereitete Datei: <a id="steckbrief-link" href="https://github.com/Yourworstdream/FSTAUD25/new/main/teilnehmer">Steckbrief anlegen</a>. Name und Text sind schon eingetragen, du kannst den Text noch ändern.</li>
+      <li>Klick auf <b>Commit changes</b>.</li>
+      <li>Wähle <b>Create a new branch for this commit and start a pull request</b> und klick auf <b>Propose changes</b>.</li>
+      <li>Wähl rechts bei <b>Reviewers</b> eine Person aus der Klasse aus und klick auf <b>Create pull request</b>.</li>
+    </ol>
+    <p class="leise" id="steckbrief-hinweis">Die Datei muss genauso heißen wie dein Benutzername, also <code><span data-ich-login>benutzername</span>.md</code>. Trag in Schritt 1 deinen Namen ein, dann stimmt das automatisch.</p>
+    <p class="fertig"><b>Fertig, wenn</b> oben im Pull Request ein grünes „Open“ steht.</p>
+  </section>
 
-    <!-- ===================== Überblick ===================== -->
-    <section id="ueberblick">
-      <h2>Worum geht's?</h2>
-      <p class="unterzeile">In der Industrie arbeitet niemand allein an einem Projekt – egal ob Software, SPS-Programm oder Dokumentation. Damit mehrere Leute gleichzeitig an denselben Dateien arbeiten können, ohne sich gegenseitig etwas kaputtzumachen, gibt es <b>Git</b> und <b>GitHub</b>.</p>
+  <section class="schritt" id="schritt-4">
+    <p class="schritt-nr">Schritt 4 von 7</p>
+    <h2>Review abwarten und mergen</h2>
+    <p>Jetzt schaut sich eine andere Person deinen Pull Request an. Gibt sie ihn frei (<b>Approve</b>), klickst du unten auf <b>Merge pull request</b> und dann auf <b>Confirm merge</b>. Damit ist deine Änderung im Hauptstand. Den Branch kannst du danach mit <b>Delete branch</b> löschen.</p>
+    <p>Soll noch etwas geändert werden, bearbeite die Datei direkt im Pull Request unter <b>Files changed</b>. Einen neuen Pull Request brauchst du dafür nicht.</p>
+    <p class="fertig"><b>Fertig, wenn</b> oben ein lila „Merged“ steht. Ist der Merge-Knopf grau, fehlt noch die Freigabe.</p>
+  </section>
 
-      <div class="drei-spalten">
-        <div class="box">
-          <h3>🕓 Git = Versionsverwaltung</h3>
-          <p>Git merkt sich jede Änderung an jeder Datei: wer, wann, was und warum. Jeder alte Stand lässt sich wiederherstellen.</p>
-        </div>
-        <div class="box">
-          <h3>🌐 GitHub = Treffpunkt</h3>
-          <p>GitHub speichert das Git-Repository online. Dort schlagen wir Änderungen vor, prüfen sie gegenseitig und besprechen Aufgaben.</p>
-        </div>
-        <div class="box">
-          <h3>🏭 Auch in der Automatisierung</h3>
-          <p>SPS-Projekte werden zunehmend mit Git versioniert, z.&nbsp;B. über das Version Control Interface im TIA Portal oder CODESYS Git. Was du hier lernst, brauchst du später im Job.</p>
-        </div>
-      </div>
+  <section class="schritt" id="schritt-5">
+    <p class="schritt-nr">Schritt 5 von 7</p>
+    <h2>Einen Pull Request prüfen</h2>
+    <p>Öffne einen <a href="https://github.com/Yourworstdream/FSTAUD25/pulls" data-repo="/pulls">offenen Pull Request</a> von jemand anderem. Unter <b>Files changed</b> siehst du, was geändert wurde: Grün ist neu, Rot wurde gelöscht.</p>
+    <p>Klick oben rechts auf <b>Review changes</b>, wähle <b>Approve</b>, wenn alles passt, oder <b>Request changes</b>, wenn etwas fehlt, und schreib kurz dazu, warum. Bleib dabei freundlich und konkret.</p>
+    <p class="fertig"><b>Fertig, wenn</b> im Pull Request „dein-name approved these changes“ steht.</p>
+  </section>
 
-      <h3>Dein Weg in 7 Schritten</h3>
-      <p>Jeder Schritt wird automatisch auf GitHub erkannt und erscheint innerhalb von etwa einer Minute auf dem <a href="fortschritt.html">Live-Fortschritt</a>. Die Reihenfolge ist nicht streng – aber so ist es am einfachsten:</p>
-      <div class="wegweiser" id="wegweiser">
-        <a class="weg" href="#schritt-1" data-schritt="anmeldung" style="--farbe:#6366f1"><span class="icon">📝</span><b>1 · Angemeldet</b><span class="klein">Konto erstellen &amp; Formular abschicken</span></a>
-        <a class="weg" href="#schritt-2" data-schritt="team" style="--farbe:#0ea5e9"><span class="icon">🤝</span><b>2 · Im Team</b><span class="klein">Einladung ins Repository annehmen</span></a>
-        <a class="weg" href="#schritt-3" data-schritt="pr" style="--farbe:#10b981"><span class="icon">🌿</span><b>3 · Pull Request</b><span class="klein">Eigenen Steckbrief vorschlagen</span></a>
-        <a class="weg" href="#schritt-4" data-schritt="merge" style="--farbe:#22c55e"><span class="icon">✅</span><b>4 · Gemerged</b><span class="klein">Review bekommen &amp; übernehmen</span></a>
-        <a class="weg" href="#schritt-5" data-schritt="review" style="--farbe:#f59e0b"><span class="icon">👀</span><b>5 · Review</b><span class="klein">PR von jemand anderem prüfen</span></a>
-        <a class="weg" href="#schritt-6" data-schritt="diskussion" style="--farbe:#ec4899"><span class="icon">💬</span><b>6 · Diskussion</b><span class="klein">In Issues mitreden</span></a>
-        <a class="weg" href="#schritt-7" data-schritt="projekt" style="--farbe:#8b5cf6"><span class="icon">🚀</span><b>7 · Projekt</b><span class="klein">Wiki-Seite zum Klassenprojekt</span></a>
-      </div>
-      <div class="hinweis">
-        <p><b>Du brauchst nichts zu installieren.</b> Alle 7 Schritte funktionieren komplett im Browser. Wer möchte, kann später auch <a href="#lokal">mit Git auf dem eigenen PC</a> arbeiten.</p>
-      </div>
-    </section>
+  <section class="schritt" id="schritt-6">
+    <p class="schritt-nr">Schritt 6 von 7</p>
+    <h2>In einem Issue mitreden</h2>
+    <p>Issues sind unsere Aufgabenliste. Öffne eines der <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+label%3Athema" data-repo="/issues?q=is%3Aissue+label%3Athema">Themen fürs Wiki</a> und schreib unten einen Kommentar, zum Beispiel welches Thema dich interessiert.</p>
+    <p class="fertig"><b>Fertig, wenn</b> dein Kommentar unter dem Issue steht.</p>
+  </section>
 
-    <!-- ===================== Schritt 1 ===================== -->
-    <section id="schritt-1" style="--farbe:#6366f1">
-      <h2><span class="nr">1</span> GitHub-Konto erstellen &amp; anmelden</h2>
-      <div class="meilenstein" data-meilenstein="anmeldung">📝 Meilenstein „Angemeldet“</div>
+  <section class="schritt" id="schritt-7">
+    <p class="schritt-nr">Schritt 7 von 7</p>
+    <h2>Eine Wiki-Seite schreiben</h2>
+    <p>Zusammen schreiben wir ein kleines Wiki zur Automatisierungstechnik. Es gibt 12 Themen, jede Person übernimmt eins.</p>
+    <ol>
+      <li>Such dir bei den <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+is%3Aopen+label%3Athema" data-repo="/issues?q=is%3Aissue+is%3Aopen+label%3Athema">Themen</a> ein freies aus, schreib „Ich übernehme das“ und trag dich rechts bei <b>Assignees</b> ein.</li>
+      <li>Leg die Seite mit der <a id="thema-link" href="https://github.com/Yourworstdream/FSTAUD25/new/main/projekt/themen">Vorlage</a> an und gib ihr einen Namen wie <code>03-sensoren.md</code>.</li>
+      <li>Weiter wie in Schritt 3 und 4: neuer Branch, Pull Request, Review, Merge. Schreib in den Pull Request <code>Closes #</code> und die Nummer deines Themen-Issues.</li>
+    </ol>
+    <p class="fertig"><b>Fertig, wenn</b> dein Pull Request mit der Wiki-Seite gemerged ist.</p>
+  </section>
 
-      <h3>a) Konto erstellen (falls du noch keins hast)</h3>
-      <ol class="anleitung">
-        <li>Öffne <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a>.</li>
-        <li>Gib deine E-Mail-Adresse ein, wähle ein Passwort und einen <b>Benutzernamen</b>. Den Benutzernamen brauchst du gleich – merk ihn dir gut.</li>
-        <li>Löse das Rätsel, gib den Code aus der Bestätigungs-E-Mail ein und wähle den kostenlosen Plan (<span class="gh-btn">Free</span>).</li>
-        <li>Richte die <b>Zwei-Faktor-Authentifizierung</b> ein – GitHub verlangt sie für alle, die Code beitragen: Profilbild oben rechts → <span class="gh-btn">Settings</span> → <span class="gh-btn">Password and authentication</span> → <span class="gh-btn">Enable two-factor authentication</span>. Am einfachsten mit einer Authenticator-App auf dem Handy. <b>Die Recovery-Codes sicher aufheben!</b></li>
-      </ol>
-      <div class="hinweis">
-        <p><b>Tipp zum Benutzernamen:</b> Du musst nicht deinen echten Namen verwenden. Erlaubt sind Buchstaben, Zahlen und Bindestriche. Wähle etwas, das du auch in ein paar Jahren noch in eine Bewerbung schreiben würdest 😉</p>
-      </div>
+  <section class="schritt">
+    <p>Das war's. Wenn du irgendwo hängst, schau auf die <a href="hilfe.html">Hilfe-Seite</a> oder frag in der Klasse.</p>
+  </section>
+</main>
 
-      <h3 id="anmeldung">b) Für die Klasse anmelden</h3>
-      <p>Trag hier deinen Namen und GitHub-Benutzernamen ein. Danach öffnet sich GitHub mit einem fertig ausgefüllten <b>Anmelde-Issue</b> (ein Issue ist so etwas wie ein Ticket). Dort musst du nur noch auf <span class="gh-btn gruen">Create</span> klicken.</p>
-
-      <div class="box">
-        <form class="formular" id="anmelde-form" novalidate>
-          <label>Name <span class="klein">(Vorname + Anfangsbuchstabe des Nachnamens)</span>
-            <input id="f-name" name="name" required maxlength="40" placeholder="z. B. Max M." autocomplete="off">
-            <span class="feld-tipp" id="name-tipp" hidden>Tipp: Das Repository ist öffentlich – vom Nachnamen reicht der Anfangsbuchstabe.</span>
-          </label>
-          <label>GitHub-Benutzername
-            <span class="login-feld"><span>@</span><input id="f-login" name="login" required maxlength="39" placeholder="dein-benutzername" autocapitalize="off" autocomplete="off" spellcheck="false"></span>
-          </label>
-          <div class="login-vorschau" id="login-vorschau" aria-live="polite" hidden><img alt=""><span></span></div>
-          <p class="fehler" id="f-fehler" role="alert" hidden></p>
-          <div class="knopf-reihe">
-            <button class="knopf primaer" type="submit">Anmeldung auf GitHub öffnen ↗</button>
-          </div>
-          <p class="klein">Dein Benutzername wird nur in diesem Browser gespeichert, damit die Anleitung dir passende Links anzeigen kann.</p>
-        </form>
-        <div class="hinweis gut" id="anmelde-erfolg" hidden>
-          <p><b>Super! 🎉</b> Klick auf GitHub unten auf <span class="gh-btn gruen">Create</span> (oder <span class="gh-btn gruen">Submit new issue</span>) – dann bist du angemeldet. Falls sich kein neuer Tab geöffnet hat: <a id="anmelde-link" href="#" target="_blank" rel="noopener">Anmelde-Issue hier öffnen ↗</a></p>
-          <p>Als Nächstes lädt dich <b>@Yourworstdream</b> ins Repository ein → weiter mit <a href="#schritt-2">Schritt 2</a>.</p>
-        </div>
-      </div>
-      <div class="hinweis achtung">
-        <p><b>Datenschutz:</b> Das Repository ist öffentlich. Gib nur deinen Vornamen und den Anfangsbuchstaben deines Nachnamens an – keine Adresse, Telefonnummer oder Ähnliches.</p>
-      </div>
-    </section>
-
-    <!-- ===================== Schritt 2 ===================== -->
-    <section id="schritt-2" style="--farbe:#0ea5e9">
-      <h2><span class="nr">2</span> Einladung ins Repository annehmen</h2>
-      <div class="meilenstein" data-meilenstein="team">🤝 Meilenstein „Im Team“</div>
-      <p>Nach deiner Anmeldung fügt dich <b>@Yourworstdream</b> als <i>Collaborator</i> (Mitarbeiter:in) hinzu. Erst dann darfst du im Repository Branches anlegen und Pull Requests zusammenführen.</p>
-      <ol class="anleitung">
-        <li>Du bekommst eine E-Mail: <i>„@Yourworstdream has invited you to collaborate on the Yourworstdream/FSTAUD25 repository“</i>. Schau auch im Spam-Ordner nach.</li>
-        <li>Klick auf <span class="gh-btn">View invitation</span> und dann auf <span class="gh-btn gruen">Accept invitation</span>.<br>
-          Oder direkt: <a href="https://github.com/Yourworstdream/FSTAUD25/invitations" data-repo="/invitations" target="_blank" rel="noopener">Einladung auf GitHub öffnen ↗</a></li>
-        <li>Fertig! Dein Anmelde-Issue wird automatisch geschlossen, sobald die Einladung angenommen ist (kann bis zu 10&nbsp;Minuten dauern).</li>
-      </ol>
-      <div class="hinweis achtung">
-        <p>Einladungen verfallen nach <b>7 Tagen</b>. Wenn GitHub dir später anbietet, das Repository zu <i>„forken“</i> (<span class="gh-btn">Fork this repository</span>), hast du die Einladung noch nicht angenommen – dann nicht forken, sondern die Einladung annehmen.</p>
-      </div>
-    </section>
-
-    <!-- ===================== Schritt 3 ===================== -->
-    <section id="schritt-3" style="--farbe:#10b981">
-      <h2><span class="nr">3</span> Dein erster Pull Request: der Steckbrief</h2>
-      <div class="meilenstein" data-meilenstein="pr">🌿 Meilenstein „Pull Request“</div>
-      <p>Auf dem Haupt-Branch <code>main</code> liegt immer der „offizielle“ Stand. Niemand ändert <code>main</code> direkt. Stattdessen legst du einen eigenen <b>Branch</b> (Abzweigung) an, arbeitest dort und schlägst deine Änderung mit einem <b>Pull Request</b> (PR) vor. Nach einem Review wird sie in <code>main</code> übernommen (<b>Merge</b>).</p>
-
-      <svg class="git-graph" viewBox="0 0 640 150" role="img" aria-label="Schema: Vom Branch main zweigt ein Branch für den Steckbrief ab, bekommt zwei Commits und wird nach Pull Request und Review wieder in main gemerged.">
-        <line x1="20" y1="112" x2="620" y2="112" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-        <path d="M160 112 C 195 112, 190 46, 230 46 L 410 46 C 450 46, 445 112, 480 112" fill="none" stroke="#10b981" stroke-width="4"/>
-        <g stroke-width="4">
-          <circle cx="70" cy="112" r="9" style="fill:var(--surface)" stroke="currentColor"/>
-          <circle cx="160" cy="112" r="9" style="fill:var(--surface)" stroke="currentColor"/>
-          <circle cx="270" cy="46" r="9" style="fill:var(--surface)" stroke="#10b981"/>
-          <circle cx="360" cy="46" r="9" style="fill:var(--surface)" stroke="#10b981"/>
-          <circle cx="480" cy="112" r="11" fill="#22c55e" stroke="#22c55e"/>
-          <circle cx="580" cy="112" r="9" style="fill:var(--surface)" stroke="currentColor"/>
-        </g>
-        <text x="20" y="140">main</text>
-        <text x="228" y="22">Branch: steckbrief-dein-name</text>
-        <text x="250" y="80" class="klein-text">Commit 1</text>
-        <text x="340" y="80" class="klein-text">Commit 2</text>
-        <text x="408" y="140">Pull Request → Merge ✓</text>
-      </svg>
-
-      <h3>So geht's – komplett im Browser</h3>
-      <ol class="anleitung">
-        <li>
-          <p>Klick auf den Knopf. GitHub öffnet sich mit dem richtigen Dateinamen <code>teilnehmer/<span data-ich-login>dein-benutzername</span>.md</code> und einer ausgefüllten Vorlage:</p>
-          <p class="knopf-reihe"><a class="knopf primaer" id="steckbrief-link" href="https://github.com/Yourworstdream/FSTAUD25/new/main/teilnehmer" target="_blank" rel="noopener">📄 Steckbrief-Datei auf GitHub anlegen ↗</a></p>
-          <p class="klein" id="steckbrief-ohne-login">Trag zuerst in <a href="#anmeldung">Schritt 1b</a> deinen Benutzernamen ein, dann ist der Dateiname automatisch richtig. Ohne Knopf: Ordner <code>teilnehmer</code> öffnen → <span class="gh-btn">Add file</span> → <span class="gh-btn">Create new file</span>.</p>
-        </li>
-        <li>
-          <p>Passe den Inhalt an (Emoji, was du lernen willst, Lieblingsthema). So sieht die Vorlage aus:</p>
-          <pre><code id="steckbrief-code"># Dein Name
-
-- **Emoji:** 🤖
-- **Das will ich lernen:** Mit Git und GitHub im Team arbeiten
-- **Lieblingsthema in der Automatisierung:** SPS-Programmierung
-</code></pre>
-        </li>
-        <li>Klick oben rechts auf <span class="gh-btn gruen">Commit changes…</span>. Als <i>Commit message</i> z.&nbsp;B. <code>Steckbrief von <span data-ich-name>Dein Name</span></code>.</li>
-        <li>Wähle <b>„Create a new branch for this commit and start a pull request“</b>, nenne den Branch <code>steckbrief-<span data-ich-login>dein-benutzername</span></code> und klick auf <span class="gh-btn gruen">Propose changes</span>.</li>
-        <li>Auf der Seite <i>„Open a pull request“</i>: Beschreibung kurz ausfüllen und rechts bei <span class="gh-btn">Reviewers</span> ⚙️ eine Person aus der Klasse auswählen. Dann <span class="gh-btn gruen">Create pull request</span>.</li>
-      </ol>
-      <div class="hinweis gut">
-        <p><b>Geschafft!</b> Dein PR erscheint unter <a href="https://github.com/Yourworstdream/FSTAUD25/pulls" data-repo="/pulls" target="_blank" rel="noopener">Pull requests</a> und auf dem Live-Fortschritt leuchtet 🌿 auf.</p>
-      </div>
-      <div class="hinweis achtung">
-        <p>Der Dateiname muss <b>genau dein GitHub-Benutzername</b> sein (z.&nbsp;B. <code>max-m.md</code>) und im Ordner <code>teilnehmer/</code> liegen. Bearbeite nur deine eigene Datei.</p>
-      </div>
-    </section>
-
-    <!-- ===================== Schritt 4 ===================== -->
-    <section id="schritt-4" style="--farbe:#22c55e">
-      <h2><span class="nr">4</span> Review bekommen &amp; mergen</h2>
-      <div class="meilenstein" data-meilenstein="merge">✅ Meilenstein „Gemerged“</div>
-      <p><code>main</code> ist geschützt: Ein PR kann erst übernommen werden, wenn <b>eine andere Person</b> ihn geprüft und freigegeben hat. Das Review kann drei Ergebnisse haben:</p>
-      <div class="tabelle-wrap">
-        <table>
-          <thead><tr><th>Ergebnis</th><th>Bedeutung</th><th>Was du tust</th></tr></thead>
-          <tbody>
-            <tr><td>✅ <b>Approved</b></td><td>Alles gut, freigegeben.</td><td>Mergen (siehe unten).</td></tr>
-            <tr><td>💬 <b>Comment</b></td><td>Anmerkungen oder Fragen, keine Entscheidung.</td><td>Antworten, ggf. ändern.</td></tr>
-            <tr><td>🔁 <b>Changes requested</b></td><td>Bitte erst etwas ändern.</td><td>Änderungen nachreichen.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Änderungen nachreichen</h3>
-      <ol class="anleitung">
-        <li>Öffne deinen PR → Tab <span class="gh-btn">Files changed</span> → bei deiner Datei auf <span class="gh-btn">⋯</span> → <span class="gh-btn">Edit file</span>.</li>
-        <li>Ändern, dann <span class="gh-btn gruen">Commit changes…</span> – diesmal <b>direkt auf deinen Branch</b> <code>steckbrief-…</code> committen.</li>
-        <li>Der PR aktualisiert sich automatisch. Kein neuer PR nötig!</li>
-      </ol>
-
-      <h3>Mergen</h3>
-      <ol class="anleitung">
-        <li>Sobald dein PR freigegeben ist, erscheint unten der Knopf <span class="gh-btn gruen">Merge pull request</span>. Klicken und mit <span class="gh-btn gruen">Confirm merge</span> bestätigen.</li>
-        <li>Danach <span class="gh-btn">Delete branch</span> – der Branch wird nicht mehr gebraucht.</li>
-      </ol>
-      <div class="hinweis">
-        <p>Noch kein Review bekommen? Schreib einen Kommentar in deinen PR und erwähne jemanden mit <code>@benutzername</code> – die Person bekommt dann eine Benachrichtigung.</p>
-      </div>
-    </section>
-
-    <!-- ===================== Schritt 5 ===================== -->
-    <section id="schritt-5" style="--farbe:#f59e0b">
-      <h2><span class="nr">5</span> Selbst reviewen</h2>
-      <div class="meilenstein" data-meilenstein="review">👀 Meilenstein „Review“</div>
-      <p>Reviews sind das Herz der Teamarbeit: Vier Augen sehen mehr als zwei. Prüfe mindestens einen PR von jemand anderem.</p>
-      <ol class="anleitung">
-        <li>Öffne <a href="https://github.com/Yourworstdream/FSTAUD25/pulls?q=is%3Apr+is%3Aopen+review-requested%3A%40me" data-repo="/pulls?q=is%3Apr+is%3Aopen+review-requested%3A%40me" target="_blank" rel="noopener">PRs, bei denen du als Reviewer eingetragen bist ↗</a> – oder einfach irgendeinen offenen PR einer anderen Person.</li>
-        <li>Tab <span class="gh-btn">Files changed</span>: Grün markierte Zeilen sind neu, rot markierte wurden entfernt.</li>
-        <li>Zu einer bestimmten Zeile etwas anmerken: mit der Maus auf die Zeile → blaues <span class="gh-btn">+</span> → Kommentar schreiben → <span class="gh-btn gruen">Start a review</span>.</li>
-        <li>Oben rechts <span class="gh-btn gruen">Review changes</span> (bzw. <span class="gh-btn gruen">Submit review</span>) → <b>Comment</b>, <b>Approve</b> oder <b>Request changes</b> wählen → absenden.</li>
-      </ol>
-      <div class="drei-spalten">
-        <div class="box">
-          <h3>✔️ Worauf achten?</h3>
-          <ul>
-            <li>Richtiger Ordner, richtiger Dateiname?</li>
-            <li>Rechtschreibung und Formatierung?</li>
-            <li>Stimmt der Inhalt fachlich?</li>
-          </ul>
-        </div>
-        <div class="box">
-          <h3>🤝 Fair bleiben</h3>
-          <ul>
-            <li>Erst loben, dann Verbesserungen.</li>
-            <li>Konkret: „Zeile 3: …“ statt „passt nicht“.</li>
-            <li>Kritisiere die Sache, nie die Person.</li>
-          </ul>
-        </div>
-        <div class="box">
-          <h3>💡 Profi-Trick</h3>
-          <p>Mit dem Knopf „Suggest changes“ (±) im Zeilen-Kommentar kannst du eine Korrektur direkt vorschlagen – die andere Person übernimmt sie mit einem Klick.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== Schritt 6 ===================== -->
-    <section id="schritt-6" style="--farbe:#ec4899">
-      <h2><span class="nr">6</span> Mitdiskutieren mit Issues</h2>
-      <div class="meilenstein" data-meilenstein="diskussion">💬 Meilenstein „Diskussion“</div>
-      <p><b>Issues</b> sind unsere Aufgabenliste: Fragen, Ideen, Fehler, Themen fürs Projekt. Jede:r kann sie erstellen und kommentieren.</p>
-      <ol class="anleitung">
-        <li>Öffne den Tab <a href="https://github.com/Yourworstdream/FSTAUD25/issues" data-repo="/issues" target="_blank" rel="noopener">Issues</a> und such dir ein Thema aus – z.&nbsp;B. eines der <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+label%3Athema" data-repo="/issues?q=is%3Aissue+label%3Athema" target="_blank" rel="noopener">Wiki-Themen</a>.</li>
-        <li>Unten ins Kommentarfeld schreiben und <span class="gh-btn gruen">Comment</span> klicken.</li>
-        <li>Eigenes Issue erstellen: <span class="gh-btn gruen">New issue</span> → Vorlage wählen, z.&nbsp;B. <b>🆘 Ich brauche Hilfe</b> oder <b>🧩 Idee fürs Klassenprojekt</b>.</li>
-      </ol>
-      <h3>Nützliche Schreibweisen (Markdown)</h3>
-      <div class="tabelle-wrap">
-        <table>
-          <thead><tr><th>Du schreibst</th><th>Ergebnis</th></tr></thead>
-          <tbody>
-            <tr><td><code>**wichtig**</code></td><td><b>wichtig</b></td></tr>
-            <tr><td><code>- Punkt</code></td><td>Aufzählung</td></tr>
-            <tr><td><code>- [ ] Aufgabe</code></td><td>Checkbox zum Abhaken</td></tr>
-            <tr><td><code>@benutzername</code></td><td>Person erwähnen (sie wird benachrichtigt)</td></tr>
-            <tr><td><code>#12</code></td><td>Link zu Issue oder PR Nr. 12</td></tr>
-            <tr><td><code>Closes #12</code> (in einem PR)</td><td>Issue 12 wird beim Merge automatisch geschlossen</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ===================== Schritt 7 ===================== -->
-    <section id="schritt-7" style="--farbe:#8b5cf6">
-      <h2><span class="nr">7</span> Klassenprojekt: das Automatisierungs-Wiki</h2>
-      <div class="meilenstein" data-meilenstein="projekt">🚀 Meilenstein „Projekt“</div>
-      <p>Zusammen schreiben wir ein Nachschlagewerk zur Automatisierungstechnik. <b>12 Themen für 12 Leute</b> – jede:r übernimmt eine Seite im Ordner <code>projekt/themen/</code>.</p>
-      <ul class="themen">
-        <li><code>01</code> SPS-Grundlagen</li>
-        <li><code>02</code> Programmiersprachen nach IEC 61131-3</li>
-        <li><code>03</code> Sensoren</li>
-        <li><code>04</code> Aktoren &amp; Antriebstechnik</li>
-        <li><code>05</code> Pneumatik &amp; Elektropneumatik</li>
-        <li><code>06</code> Industrielle Bussysteme</li>
-        <li><code>07</code> IO-Link</li>
-        <li><code>08</code> OPC UA &amp; Industrie 4.0</li>
-        <li><code>09</code> HMI &amp; Visualisierung</li>
-        <li><code>10</code> Regelungstechnik &amp; PID-Regler</li>
-        <li><code>11</code> Sicherheitstechnik</li>
-        <li><code>12</code> Robotik &amp; Handhabungstechnik</li>
-      </ul>
-
-      <h3>Ablauf</h3>
-      <ol class="anleitung">
-        <li><b>Thema reservieren:</b> Öffne das passende <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+label%3Athema" data-repo="/issues?q=is%3Aissue+label%3Athema" target="_blank" rel="noopener">Themen-Issue</a>, schreib „Ich übernehme das“ und trag dich rechts unter <span class="gh-btn">Assignees</span> → <span class="gh-btn">assign yourself</span> ein. Wer zuerst kommt …</li>
-        <li><b>Seite anlegen:</b> <a id="thema-link" href="https://github.com/Yourworstdream/FSTAUD25/new/main/projekt/themen" target="_blank" rel="noopener">Neue Datei mit Vorlage öffnen ↗</a> und den Dateinamen anpassen, z.&nbsp;B. <code>03-sensoren.md</code>. Die Vorlage liegt auch unter <code>projekt/VORLAGE.md</code>.</li>
-        <li><b>Committen</b> auf einen neuen Branch, z.&nbsp;B. <code>thema/03-sensoren</code>, und einen PR erstellen. Schreib in die Beschreibung <code>Closes #&lt;Nummer des Themen-Issues&gt;</code>.</li>
-        <li><b>Inhaltsverzeichnis:</b> Trag im selben Branch deinen Namen in die Tabelle in <code>projekt/README.md</code> ein. Weil das alle machen, gibt es hier vermutlich einen <a href="#konflikte">Merge-Konflikt</a> – perfekt zum Üben!</li>
-        <li><b>Review &amp; Merge</b> wie in Schritt 4. Sobald dein PR mit Änderungen in <code>projekt/</code> gemerged ist, zündet 🚀.</li>
-      </ol>
-      <p>Die Seiten dürfen gern mit der Zeit wachsen: Wer eine Seite verbessern will, macht einfach einen neuen Branch und PR.</p>
-    </section>
-
-    <hr>
-
-    <!-- ===================== Zusammenarbeit ===================== -->
-    <section id="zusammenarbeit">
-      <h2>So arbeiten wir zusammen</h2>
-      <p class="unterzeile">Jede Änderung – egal wie klein – läuft nach demselben Muster, dem sogenannten <b>GitHub Flow</b>:</p>
-      <div class="flow">
-        <div style="--farbe:#ec4899"><span class="icon">🧩</span><b>Issue</b>Aufgabe beschreiben</div>
-        <div style="--farbe:#10b981"><span class="icon">🌿</span><b>Branch</b>eigene Abzweigung</div>
-        <div style="--farbe:#0ea5e9"><span class="icon">💾</span><b>Commits</b>Änderungen speichern</div>
-        <div style="--farbe:#6366f1"><span class="icon">📬</span><b>Pull Request</b>Änderung vorschlagen</div>
-        <div style="--farbe:#f59e0b"><span class="icon">👀</span><b>Review</b>gegenseitig prüfen</div>
-        <div style="--farbe:#22c55e"><span class="icon">✅</span><b>Merge</b>in main übernehmen</div>
-      </div>
-
-      <h3>Unsere Teamregeln</h3>
-      <ol class="regeln">
-        <li><b>Nie direkt auf <code>main</code>.</b> Immer Branch + Pull Request.</li>
-        <li><b>Ein Branch = ein Thema.</b> Kleine PRs werden schneller geprüft.</li>
-        <li><b>Gute Commit-Nachrichten</b>, die sagen, was sich geändert hat.</li>
-        <li><b>Vorher aktualisieren:</b> Vor dem Start neuesten Stand von <code>main</code> holen.</li>
-        <li><b>Nur eigene Dateien</b> bearbeiten – außer es ist abgesprochen.</li>
-        <li><b>Respektvolle Reviews.</b> Sachlich, konkret, freundlich.</li>
-        <li><b>Keine Passwörter oder privaten Daten</b> – das Repo ist öffentlich.</li>
-        <li><b>Nach dem Merge</b> den Branch löschen.</li>
-      </ol>
-
-      <h3>Gute und schlechte Commit-Nachrichten</h3>
-      <div class="tabelle-wrap">
-        <table>
-          <thead><tr><th>👎 Schlecht</th><th>👍 Gut</th></tr></thead>
-          <tbody>
-            <tr><td><code>update</code></td><td><code>Sensoren: Abschnitt zu induktiven Näherungsschaltern ergänzt</code></td></tr>
-            <tr><td><code>fix</code></td><td><code>Tippfehler in der PID-Formel korrigiert</code></td></tr>
-            <tr><td><code>asdf</code></td><td><code>Steckbrief von Max M. hinzugefügt</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Branch-Namen</h3>
-      <p>Kurz, klein geschrieben, mit Bindestrichen: <code>steckbrief-max-m</code>, <code>thema/03-sensoren</code>, <code>fix/tippfehler-sps</code>.</p>
-    </section>
-
-    <!-- ===================== Konflikte ===================== -->
-    <section id="konflikte">
-      <h2>Merge-Konflikte verstehen und lösen</h2>
-      <p class="unterzeile">Ein Konflikt entsteht, wenn zwei Leute <b>dieselbe Stelle</b> einer Datei unterschiedlich geändert haben. Git weiß dann nicht, welche Version richtig ist – das musst du entscheiden. Das ist ganz normal und kein Fehler!</p>
-      <p>Git markiert die Stelle so:</p>
-      <pre><code>| 02 | Programmiersprachen nach IEC 61131-3 | Lena K. |
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; thema/03-sensoren
-| 03 | Sensoren                             | Jonas M. |
-=======
-| 03 | Sensoren                             | Aylin S. |
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; main
-| 04 | Aktoren &amp; Antriebstechnik           |          |</code></pre>
-      <p>Oben (bis <code>=======</code>) steht deine Version, unten die Version aus <code>main</code>. Du löschst die Markierungszeilen und behältst, was richtig ist – manchmal beides.</p>
-
-      <h3>Im Browser lösen</h3>
-      <ol class="anleitung">
-        <li>Im PR steht <i>„This branch has conflicts that must be resolved“</i>. Klick auf <span class="gh-btn">Resolve conflicts</span>.</li>
-        <li>Bearbeite die markierte Stelle: Zeilen mit <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> und <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> löschen, richtigen Inhalt stehen lassen.</li>
-        <li><span class="gh-btn">Mark as resolved</span> → <span class="gh-btn gruen">Commit merge</span>. Fertig – der PR kann jetzt wieder gemerged werden.</li>
-      </ol>
-      <div class="hinweis">
-        <p><b>Konflikte vermeiden:</b> Kleine PRs, schnell mergen, und wenn im PR <span class="gh-btn">Update branch</span> angezeigt wird, draufklicken – dann holt GitHub den neuesten Stand von <code>main</code> in deinen Branch.</p>
-      </div>
-    </section>
-
-    <!-- ===================== Lokal ===================== -->
-    <section id="lokal">
-      <h2>Für Fortgeschrittene: Git auf dem eigenen PC</h2>
-      <p class="unterzeile">Im Browser kommst du durch alle 7 Schritte. Für größere Projekte ist es aber praktischer, lokal zu arbeiten. Drei Möglichkeiten:</p>
-      <div class="drei-spalten">
-        <div class="box">
-          <h3>🖱️ GitHub Desktop</h3>
-          <p>Am einfachsten, ohne Befehle. <a href="https://desktop.github.com/" target="_blank" rel="noopener">desktop.github.com</a> → mit GitHub anmelden → <i>File → Clone repository</i> → <i>Current branch → New branch</i> → Änderungen <i>committen</i> → <i>Publish branch</i> → <i>Create Pull Request</i>.</p>
-        </div>
-        <div class="box">
-          <h3>🧩 VS Code</h3>
-          <p>Hat Git eingebaut (Symbol „Source Control“ links). Branch unten links wechseln, Änderungen mit ✓ committen, mit „Sync“ hochladen.</p>
-        </div>
-        <div class="box">
-          <h3>⌨️ Kommandozeile</h3>
-          <p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git installieren</a>. Beim ersten <code>git push</code> öffnet sich ein Browserfenster zur Anmeldung (Git Credential Manager).</p>
-        </div>
-      </div>
-
-      <h3>Einmalig einrichten</h3>
-      <pre><code>git config --global user.name "Max M."
-git config --global user.email "12345678+max-m@users.noreply.github.com"</code></pre>
-      <p class="klein">Deine private <i>noreply</i>-Adresse findest du auf GitHub unter Settings → Emails („Keep my email addresses private“). So bleibt deine echte E-Mail geheim.</p>
-
-      <h3>Der typische Ablauf</h3>
-      <pre><code># 1. Repository einmalig herunterladen
-git clone https://github.com/Yourworstdream/FSTAUD25.git
-cd FSTAUD25
-
-# 2. Neuesten Stand holen und eigenen Branch anlegen
-git switch main
-git pull
-git switch -c thema/03-sensoren
-
-# 3. Dateien bearbeiten, dann speichern (committen)
-git add projekt/themen/03-sensoren.md
-git commit -m "Sensoren: Grundlagen und Beispiele ergänzt"
-
-# 4. Branch hochladen – danach den Link in der Ausgabe öffnen und den PR erstellen
-git push -u origin thema/03-sensoren</code></pre>
-
-      <h3>Spickzettel</h3>
-      <div class="tabelle-wrap">
-        <table>
-          <thead><tr><th>Befehl</th><th>Was passiert</th></tr></thead>
-          <tbody>
-            <tr><td><code>git clone &lt;url&gt;</code></td><td>Repository herunterladen</td></tr>
-            <tr><td><code>git status</code></td><td>Zeigt, was sich geändert hat</td></tr>
-            <tr><td><code>git pull</code></td><td>Neuesten Stand vom Server holen</td></tr>
-            <tr><td><code>git switch -c &lt;name&gt;</code></td><td>Neuen Branch erstellen und wechseln</td></tr>
-            <tr><td><code>git switch &lt;name&gt;</code></td><td>Zu einem Branch wechseln</td></tr>
-            <tr><td><code>git add &lt;datei&gt;</code></td><td>Änderung für den nächsten Commit vormerken</td></tr>
-            <tr><td><code>git commit -m "…"</code></td><td>Vorgemerkte Änderungen speichern</td></tr>
-            <tr><td><code>git push -u origin &lt;name&gt;</code></td><td>Branch zum ersten Mal hochladen</td></tr>
-            <tr><td><code>git push</code></td><td>Weitere Commits hochladen</td></tr>
-            <tr><td><code>git merge main</code></td><td>Neuesten Stand von <code>main</code> in den eigenen Branch holen</td></tr>
-            <tr><td><code>git log --oneline --graph</code></td><td>Verlauf als Baum anzeigen</td></tr>
-            <tr><td><code>git restore &lt;datei&gt;</code></td><td>Nicht gespeicherte Änderung verwerfen (Vorsicht!)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ===================== Glossar ===================== -->
-    <section id="glossar">
-      <h2>Glossar</h2>
-      <dl class="glossar box">
-        <dt>Repository (Repo)</dt><dd>Projektordner mit allen Dateien und der kompletten Änderungsgeschichte.</dd>
-        <dt>Commit</dt><dd>Ein gespeicherter Zwischenstand mit Beschreibung – wie ein Speicherpunkt im Spiel.</dd>
-        <dt>Branch</dt><dd>Eine Abzweigung, auf der man arbeitet, ohne den Hauptstand zu verändern.</dd>
-        <dt>main</dt><dd>Der Haupt-Branch mit dem offiziellen, geprüften Stand.</dd>
-        <dt>Pull Request (PR)</dt><dd>Vorschlag, die Änderungen aus einem Branch in <code>main</code> zu übernehmen.</dd>
-        <dt>Review</dt><dd>Prüfung eines PRs durch eine andere Person.</dd>
-        <dt>Merge</dt><dd>Das Zusammenführen eines Branches mit einem anderen.</dd>
-        <dt>Merge-Konflikt</dt><dd>Zwei Änderungen an derselben Stelle – ein Mensch muss entscheiden.</dd>
-        <dt>Issue</dt><dd>Ticket für eine Aufgabe, Frage, Idee oder einen Fehler.</dd>
-        <dt>Label</dt><dd>Farbiges Schlagwort an Issues und PRs, z.&nbsp;B. <code>hilfe</code> oder <code>thema</code>.</dd>
-        <dt>Collaborator</dt><dd>Person mit Schreibrechten im Repository.</dd>
-        <dt>Fork</dt><dd>Eigene Kopie eines fremden Repositorys. Brauchen wir nicht, weil ihr eingeladen werdet.</dd>
-        <dt>Clone</dt><dd>Kopie des Repositorys auf dem eigenen PC.</dd>
-        <dt>Push / Pull</dt><dd>Commits hochladen / neuesten Stand herunterladen.</dd>
-        <dt>Markdown</dt><dd>Einfache Schreibweise für formatierten Text (<code>.md</code>-Dateien).</dd>
-        <dt>GitHub Actions</dt><dd>Automatische Abläufe – bei uns berechnet eine Action den Live-Fortschritt.</dd>
-        <dt>GitHub Pages</dt><dd>Veröffentlicht Webseiten direkt aus einem Repository – so wie diese Seite.</dd>
-      </dl>
-    </section>
-
-    <!-- ===================== Hilfe ===================== -->
-    <section id="hilfe">
-      <h2>Hilfe &amp; FAQ</h2>
-      <p class="unterzeile">Du hängst fest? Frag in der Klasse oder erstelle ein <a href="https://github.com/Yourworstdream/FSTAUD25/issues/new?template=hilfe.yml" data-repo="/issues/new?template=hilfe.yml" target="_blank" rel="noopener">🆘 Hilfe-Issue</a>.</p>
-      <details>
-        <summary>Ich habe keine Einladungs-E-Mail bekommen.</summary>
-        <p>Schau im Spam-Ordner nach oder öffne direkt <a href="https://github.com/Yourworstdream/FSTAUD25/invitations" data-repo="/invitations" target="_blank" rel="noopener">die Einladungsseite</a>. Steht dort nichts, hat dich der Admin noch nicht eingeladen – prüfe, ob dein Anmelde-Issue existiert.</p>
-      </details>
-      <details>
-        <summary>GitHub will, dass ich das Repository „forke“.</summary>
-        <p>Dann hast du noch keine Schreibrechte: Einladung annehmen (Schritt 2) und die Seite neu laden.</p>
-      </details>
-      <details>
-        <summary>Mein Fortschritt wird nicht angezeigt.</summary>
-        <p>Die Anzeige aktualisiert sich etwa eine Minute nach jeder Aktion, der Schritt „Im Team“ spätestens nach 10 Minuten. Prüfe außerdem: Hast du die Anmeldung wirklich mit <span class="gh-btn gruen">Create</span> abgeschickt? Heißt deine Steckbrief-Datei exakt wie dein Benutzername?</p>
-      </details>
-      <details>
-        <summary>Beim Mergen steht „Review required“ oder „Merging is blocked“.</summary>
-        <p>Das ist Absicht: Erst muss eine andere Person deinen PR mit <b>Approve</b> freigeben (Schritt 4).</p>
-      </details>
-      <details>
-        <summary>Ich habe einen Fehler im PR – muss ich einen neuen machen?</summary>
-        <p>Nein. Committe die Korrektur einfach auf denselben Branch, der PR aktualisiert sich automatisch.</p>
-      </details>
-      <details>
-        <summary>Aus Versehen etwas Falsches gemerged – was jetzt?</summary>
-        <p>Keine Panik, bei Git geht nichts verloren. Im gemergten PR gibt es unten den Knopf <span class="gh-btn">Revert</span>: Er erstellt einen neuen PR, der die Änderung rückgängig macht.</p>
-      </details>
-      <details>
-        <summary>Git fragt nach Benutzername und Passwort.</summary>
-        <p>Das normale Passwort funktioniert bei Git nicht mehr. Nutze GitHub Desktop, oder installiere Git mit dem Git Credential Manager (bei Git für Windows automatisch dabei) – dann erfolgt die Anmeldung im Browser.</p>
-      </details>
-      <details>
-        <summary>Darf ich Dateien von anderen bearbeiten?</summary>
-        <p>Nur nach Absprache – und immer über einen PR, damit die Person ihn reviewen kann.</p>
-      </details>
-    </section>
-
-    <!-- ===================== Admin ===================== -->
-    <section id="admin">
-      <h2>Für den Admin (@Yourworstdream)</h2>
-      <p class="unterzeile">Einmalige Einrichtung und die laufende Betreuung der Anmeldungen.</p>
-      <details open>
-        <summary>1. GitHub Pages einschalten (einmalig)</summary>
-        <ol>
-          <li><a href="https://github.com/Yourworstdream/FSTAUD25/settings/pages" data-repo="/settings/pages" target="_blank" rel="noopener">Settings → Pages</a> → bei <i>Build and deployment</i> als <i>Source</i> <b>GitHub Actions</b> auswählen.</li>
-          <li><a href="https://github.com/Yourworstdream/FSTAUD25/actions/workflows/fortschritt.yml" data-repo="/actions/workflows/fortschritt.yml" target="_blank" rel="noopener">Actions → „Fortschritt &amp; Webseite“</a> → <span class="gh-btn">Run workflow</span>.</li>
-          <li>Nach etwa einer Minute sind Anleitung und Live-Fortschritt unter <a href="https://yourworstdream.github.io/FSTAUD25/">yourworstdream.github.io/FSTAUD25</a> erreichbar. Ab dann aktualisiert sich alles automatisch.</li>
-        </ol>
-      </details>
-      <details>
-        <summary>2. Klassenkamerad:innen einladen</summary>
-        <ol>
-          <li>Neue Anmeldungen findest du unter <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+is%3Aopen+label%3Aanmeldung" data-repo="/issues?q=is%3Aissue+is%3Aopen+label%3Aanmeldung" target="_blank" rel="noopener">Issues mit dem Label „anmeldung“</a>. Du wirst in jedem Anmelde-Issue erwähnt und bekommst eine Benachrichtigung.</li>
-          <li><a href="https://github.com/Yourworstdream/FSTAUD25/settings/access" data-repo="/settings/access" target="_blank" rel="noopener">Settings → Collaborators</a> → <span class="gh-btn gruen">Add people</span> → Benutzername eingeben → hinzufügen.</li>
-          <li>Sobald die Einladung angenommen wurde, schließt die Action das Anmelde-Issue automatisch.</li>
-        </ol>
-      </details>
-      <details>
-        <summary>3. <code>main</code> schützen (empfohlen)</summary>
-        <ol>
-          <li><a href="https://github.com/Yourworstdream/FSTAUD25/settings/rules" data-repo="/settings/rules" target="_blank" rel="noopener">Settings → Rules → Rulesets</a> → <span class="gh-btn">New ruleset</span> → <span class="gh-btn">New branch ruleset</span>.</li>
-          <li>Name <code>main schützen</code>, <i>Enforcement status</i>: <b>Active</b>. Bei <i>Target branches</i> → <span class="gh-btn">Add target</span> → <b>Include default branch</b>.</li>
-          <li>Anhaken: <b>Restrict deletions</b>, <b>Require a pull request before merging</b> (Required approvals: <b>1</b>) und <b>Block force pushes</b> → <span class="gh-btn gruen">Create</span>.</li>
-          <li>Tipp: Unter <i>Bypass list</i> „Repository admin“ hinzufügen, damit du im Notfall eingreifen kannst.</li>
-        </ol>
-      </details>
-      <details>
-        <summary>4. Weitere Einstellungen</summary>
-        <ul>
-          <li><a href="https://github.com/Yourworstdream/FSTAUD25/settings" data-repo="/settings" target="_blank" rel="noopener">Settings → General</a> → <i>Pull Requests</i> → <b>Automatically delete head branches</b> anhaken.</li>
-          <li>In <code>klasse.json</code> lässt sich die Zahl der Plätze ändern und Konten ausblenden (z.&nbsp;B. das der Lehrkraft) – natürlich per Pull Request.</li>
-          <li>Der Fortschritt wird von <code>.github/workflows/fortschritt.yml</code> nach jeder Aktivität neu berechnet, zusätzlich alle 10 Minuten.</li>
-        </ul>
-      </details>
-    </section>
-
-  </main>
-</div>
-
-<footer class="fusszeile">
-  FST AUD 25 · <a href="https://github.com/Yourworstdream/FSTAUD25" data-repo="" target="_blank" rel="noopener">Repository</a> · <a href="fortschritt.html">Live-Fortschritt</a><br>
-  Diese Seite liegt selbst im Repository. Verbesserungsvorschlag? Mach einen Pull Request!
+<footer class="fuss">
+  FST AUD 25 · Diese Seite liegt selbst im <a href="https://github.com/Yourworstdream/FSTAUD25" data-repo="">Repository</a> und kann per Pull Request verbessert werden.
 </footer>
 
 </body>

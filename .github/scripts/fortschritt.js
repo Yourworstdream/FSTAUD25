@@ -14,7 +14,7 @@ const SCHRITTE = [
   { id: 'merge', titel: 'Gemerged', beschreibung: 'Ein eigener Pull Request wurde übernommen' },
   { id: 'review', titel: 'Review', beschreibung: 'Pull Request einer anderen Person geprüft' },
   { id: 'diskussion', titel: 'Diskussion', beschreibung: 'Issue erstellt oder kommentiert' },
-  { id: 'projekt', titel: 'Projekt', beschreibung: 'Beitrag im Ordner projekt/ gemerged' },
+  { id: 'projekt', titel: 'Wiki-Seite', beschreibung: 'Beitrag im Ordner projekt/ gemerged' },
 ];
 
 const LABELS = [
@@ -146,7 +146,7 @@ module.exports = async ({ github, context, core }) => {
       } else {
         person.zahlen.issues += 1;
         erreicht(person, 'diskussion', issue.createdAt);
-        melden(person, issue.createdAt, 'issue', `hat Issue #${issue.number} erstellt: „${kuerzen(issue.title)}“`, issue.url);
+        melden(person, issue.createdAt, 'issue', `hat Issue #${issue.number} erstellt`, issue.url);
       }
     }
     kommentareZaehlen(issue.comments.nodes, issue.number);
@@ -165,14 +165,14 @@ module.exports = async ({ github, context, core }) => {
       erreicht(autor, 'pr', pr.createdAt);
       // Ein Branch im selben Repository geht nur mit Schreibrechten, also als Collaborator.
       if (!pr.isCrossRepository) erreicht(autor, 'team', pr.createdAt);
-      melden(autor, pr.createdAt, 'pr', `hat PR #${pr.number} geöffnet: „${kuerzen(pr.title)}“`, pr.url);
+      melden(autor, pr.createdAt, 'pr', `hat Pull Request #${pr.number} geöffnet`, pr.url);
 
       if (pr.mergedAt) {
         autor.zahlen.gemerged += 1;
         erreicht(autor, 'merge', pr.mergedAt);
         const projekt = dateien.some((datei) => datei.startsWith('projekt/'));
         if (projekt) erreicht(autor, 'projekt', pr.mergedAt);
-        melden(autor, pr.mergedAt, projekt ? 'projekt' : 'merge', `PR #${pr.number} wurde gemerged 🎉`, pr.url);
+        melden(autor, pr.mergedAt, projekt ? 'projekt' : 'merge', `hat Pull Request #${pr.number} gemerged`, pr.url);
         for (const datei of dateien) {
           const schluessel = datei.toLowerCase();
           if (/^teilnehmer\/[^/]+\.md$/.test(schluessel) && !profilAutor.has(schluessel)) profilAutor.set(schluessel, autor.login);
@@ -280,9 +280,9 @@ module.exports = async ({ github, context, core }) => {
       [{ data: 'Name', header: true }, { data: 'Login', header: true }, { data: 'Schritte', header: true },
         ...SCHRITTE.map((s) => ({ data: s.titel, header: true }))],
       ...teilnehmer.map((t) => [t.name, `@${t.login}`, `${Object.keys(t.erledigt).length}/${SCHRITTE.length}`,
-        ...SCHRITTE.map((s) => (t.erledigt[s.id] ? '✅' : '·'))]),
+        ...SCHRITTE.map((s) => (t.erledigt[s.id] ? 'x' : ''))]),
     ])
-    .addLink('Live-Fortschritt öffnen', `${seitenUrl}fortschritt.html`)
+    .addLink('Klassenliste öffnen', `${seitenUrl}fortschritt.html`)
     .write();
 };
 
@@ -353,20 +353,20 @@ async function anmeldungenBetreuen({ github, context, core, owner, repo, seitenU
       if (login && istAnmeldung({ title: issue.title, labels: { nodes: issue.labels || [] } })) {
         if (!hatLabel) await github.rest.issues.addLabels({ owner, repo, issue_number: issue.number, labels: ['anmeldung'] });
         if (mitglieder && istMitglied(login)) {
-          await schliessen(github, owner, repo, issue.number, `Hallo @${login}, du bist schon im Team – super! ✅\n\nWeiter geht's mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3). Deinen Fortschritt siehst du [hier live](${seitenUrl}fortschritt.html?ich=${login}).`);
+          await schliessen(github, owner, repo, issue.number, `Hallo @${login}, du bist schon im Team. Weiter geht es mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3).`);
           erledigt.add(issue.number);
         } else {
           await github.rest.issues.createComment({
             owner, repo, issue_number: issue.number,
             body: [
-              `Hallo @${login}, danke für deine Anmeldung! 🎉`,
+              `Hallo @${login}, danke für deine Anmeldung.`,
               '',
-              '**So geht es weiter:**',
+              'So geht es weiter:',
               `1. @${owner} lädt dich als Collaborator in dieses Repository ein. Du bekommst dazu eine E-Mail von GitHub.`,
               `2. Nimm die Einladung an: https://github.com/${owner}/${repo}/invitations`,
-              `3. Dann weiter mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3) – deinem ersten Pull Request.`,
+              `3. Danach geht es mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3) weiter.`,
               '',
-              `Deinen Fortschritt siehst du [hier live](${seitenUrl}fortschritt.html?ich=${login}). Dieses Issue wird automatisch geschlossen, sobald du die Einladung angenommen hast.`,
+              `Dieses Issue wird automatisch geschlossen, sobald du die Einladung angenommen hast.`,
             ].join('\n'),
           });
         }
@@ -377,7 +377,7 @@ async function anmeldungenBetreuen({ github, context, core, owner, repo, seitenU
     if (mitglieder) {
       for (const { issue, person } of anmeldungen) {
         if (issue.state !== 'OPEN' || erledigt.has(issue.number) || !istMitglied(person.login)) continue;
-        await schliessen(github, owner, repo, issue.number, `✅ @${person.login} hat die Einladung angenommen und ist jetzt im Team. Willkommen!\n\nWeiter geht's mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3).`);
+        await schliessen(github, owner, repo, issue.number, `@${person.login} hat die Einladung angenommen und ist jetzt im Team. Weiter geht es mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3).`);
       }
     }
   } catch (fehler) {
@@ -436,8 +436,8 @@ function erstesZeichen(text) {
 
 function reviewText(zustand, nummer) {
   switch (zustand) {
-    case 'APPROVED': return `hat PR #${nummer} freigegeben ✅`;
-    case 'CHANGES_REQUESTED': return `hat bei PR #${nummer} Änderungen angefragt`;
-    default: return `hat PR #${nummer} geprüft`;
+    case 'APPROVED': return `hat Pull Request #${nummer} freigegeben`;
+    case 'CHANGES_REQUESTED': return `hat bei Pull Request #${nummer} Änderungen angefragt`;
+    default: return `hat Pull Request #${nummer} geprüft`;
   }
 }
