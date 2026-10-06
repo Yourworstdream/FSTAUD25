@@ -29,16 +29,18 @@ assets/             CSS und JavaScript der Seiten
 klasse.json         Klassenname, Anzahl Plätze, ausgeblendete Konten
 teilnehmer/         Ein Steckbrief pro Person (Schritt 3)
 projekt/            Das Wiki (Schritt 7)
-.github/            Formulare, Action und Skript für die Klassenliste
+.github/            Formulare, Actions, Skript und Tests für die Klassenliste
 ```
 
 ## Wie die Klassenliste funktioniert
 
-Nach jeder Aktivität im Repository (Issue, Kommentar, Pull Request, Review, Push auf `main`) und zusätzlich regelmäßig nach Zeitplan läuft die Action *Fortschritt & Webseite*. Sie liest die Aktivität über die GitHub-API, berechnet für jede Person die sieben Schritte, schreibt `fortschritt.json` und veröffentlicht die Seiten auf GitHub Pages. `fortschritt.html` lädt die Datei alle 20 Sekunden neu. Geplante Läufe führt GitHub bei wenig Betrieb oft nur alle paar Stunden aus; das betrifft vor allem das Häkchen „Einladung“, das sonst spätestens mit dem ersten Pull Request kommt.
+Nach jeder Aktivität im Repository (Issue, Kommentar, Pull Request, Review, Push auf `main`) und zusätzlich regelmäßig nach Zeitplan läuft die Action *Fortschritt & Webseite*. Sie liest die Aktivität über die GitHub-API, berechnet für jede Person die sieben Schritte, schreibt `fortschritt.json` und veröffentlicht die Seiten auf GitHub Pages. `fortschritt.html` lädt die Datei alle 20 Sekunden neu. Geplante Läufe führt GitHub bei wenig Betrieb oft nur alle paar Stunden aus; das betrifft vor allem das Häkchen „Einladung“, weil GitHub für eine angenommene Einladung kein Ereignis an Actions schickt. Deshalb schreibt man nach dem Annehmen „angenommen“ in sein Anmelde-Issue: Der Kommentar startet die Action sofort, sie schließt das Issue und setzt das Häkchen.
 
 Außerdem beantwortet die Action neue Anmeldungen mit den nächsten Schritten und schließt das Anmelde-Issue, sobald die Einladung angenommen wurde.
 
 `fortschritt.html?demo` zeigt die Liste mit Testdaten, `fortschritt.html?ich=<login>` hebt die eigene Zeile hervor.
+
+Das Skript hat Tests: `node --test .github/scripts/fortschritt.test.js`. Sie laufen automatisch, wenn ein Pull Request etwas in `.github/scripts/` ändert.
 
 ## Einrichtung (einmalig, für @Yourworstdream)
 

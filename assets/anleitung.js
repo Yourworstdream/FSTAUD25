@@ -35,6 +35,7 @@
     const hatLogin = LOGIN_MUSTER.test(ich.login);
     document.querySelectorAll('[data-ich-login]').forEach((el) => { el.textContent = hatLogin ? ich.login : 'benutzername'; });
     $('steckbrief-link').href = neueDatei('teilnehmer', `${hatLogin ? ich.login : 'benutzername'}.md`, steckbrief(ich.name));
+    $('anmelde-issue-link').href = `${REPO_URL}/issues?q=${encodeURIComponent(`is:issue label:anmeldung${hatLogin ? ` author:${ich.login}` : ''}`)}`;
     $('ich').hidden = !hatLogin;
     if (hatLogin) $('ich-link').href = `fortschritt.html?ich=${encodeURIComponent(ich.login)}`;
   }

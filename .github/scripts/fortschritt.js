@@ -91,8 +91,6 @@ module.exports = async ({ github, context, core }) => {
         login,
         name: null,
         avatar: `https://github.com/${login}.png?size=96`,
-        emoji: null,
-        ziel: null,
         erledigt: {},
         zahlen: { prs: 0, gemerged: 0, reviews: 0, kommentare: 0, issues: 0, commits: 0 },
         letzteAktivitaet: null,
@@ -136,8 +134,9 @@ module.exports = async ({ github, context, core }) => {
   const anmeldungen = [];
   for (const issue of issues) {
     const person = holen(issue.author);
+    const anmeldung = istAnmeldung(issue);
     if (person) {
-      if (istAnmeldung(issue)) {
+      if (anmeldung) {
         kader.add(person.login.toLowerCase());
         anmeldungen.push({ issue, person });
         erreicht(person, 'anmeldung', issue.createdAt);
@@ -149,7 +148,8 @@ module.exports = async ({ github, context, core }) => {
         melden(person, issue.createdAt, 'issue', `hat Issue #${issue.number} erstellt`, issue.url);
       }
     }
-    kommentareZaehlen(issue.comments.nodes, issue.number);
+    // Kommentare in Anmelde-Issues dienen nur der Absprache („angenommen“) und zählen nicht als Diskussion.
+    if (!anmeldung) kommentareZaehlen(issue.comments.nodes, issue.number);
   }
 
   // ---------- Pull Requests ----------
@@ -209,10 +209,8 @@ module.exports = async ({ github, context, core }) => {
       if (!person) continue;
       kader.add(person.login.toLowerCase());
       person.profil = true;
-      const profil = profilLesen(fs.readFileSync(path.join(ordner, datei), 'utf8'));
-      if (profil.name) person.name = profil.name;
-      if (profil.emoji) person.emoji = profil.emoji;
-      if (profil.ziel) person.ziel = profil.ziel;
+      const name = nameAusSteckbrief(fs.readFileSync(path.join(ordner, datei), 'utf8'));
+      if (name) person.name = name;
     }
   }
 
@@ -248,8 +246,6 @@ module.exports = async ({ github, context, core }) => {
       login: p.login,
       name: p.name || p.login,
       avatar: p.avatar,
-      emoji: p.emoji,
-      ziel: p.ziel,
       erledigt: Object.fromEntries(SCHRITTE.filter((s) => p.erledigt[s.id]).map((s) => [s.id, p.erledigt[s.id]])),
       zahlen: p.zahlen,
       letzteAktivitaet: p.letzteAktivitaet,
@@ -364,12 +360,24 @@ async function anmeldungenBetreuen({ github, context, core, owner, repo, seitenU
               'So geht es weiter:',
               `1. @${owner} lädt dich als Collaborator in dieses Repository ein. Du bekommst dazu eine E-Mail von GitHub.`,
               `2. Nimm die Einladung an: https://github.com/${owner}/${repo}/invitations`,
-              `3. Danach geht es mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3) weiter.`,
-              '',
-              `Dieses Issue wird automatisch geschlossen, sobald du die Einladung angenommen hast.`,
+              '3. Schreib danach hier kurz „angenommen“. Dann wird dieses Issue geschlossen und dein Häkchen in der Klassenliste gesetzt.',
+              `4. Weiter geht es mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3).`,
             ].join('\n'),
           });
         }
+      }
+    }
+
+    // Kommentar im eigenen Anmelde-Issue, aber noch nicht im Team: erklären, woran es liegt
+    if (context.eventName === 'issue_comment' && context.payload.action === 'created' && mitglieder) {
+      const issue = context.payload.issue;
+      const login = context.payload.comment.user && context.payload.comment.user.login;
+      const eigenes = issue && !issue.pull_request && issue.state === 'open' && issue.user && login === issue.user.login;
+      if (eigenes && istAnmeldung({ title: issue.title, labels: { nodes: issue.labels || [] } }) && !istMitglied(login)) {
+        await github.rest.issues.createComment({
+          owner, repo, issue_number: issue.number,
+          body: `@${login}, die Einladung ist noch nicht angenommen. Schau auf https://github.com/${owner}/${repo}/invitations nach. Steht dort nichts, hat dich @${owner} noch nicht eingeladen.`,
+        });
       }
     }
 
@@ -404,19 +412,11 @@ function nameAusAnmeldung(issue) {
   return kuerzen(name, 40);
 }
 
-function profilLesen(text) {
-  const zeile = (muster) => {
-    const treffer = text.match(muster);
-    return treffer ? bereinigen(treffer[1]) : null;
-  };
-  const name = zeile(/^#[ \t]+(.+)$/m);
-  const emoji = zeile(/emoji[ \t*:]*(.+)$/im);
-  const ziel = zeile(/lernen[ \t*:]*(.+)$/im);
-  return {
-    name: name ? kuerzen(name, 40) : null,
-    emoji: emoji ? erstesZeichen(emoji) : null,
-    ziel: ziel ? kuerzen(ziel, 90) : null,
-  };
+// Der Name steht in der ersten Überschrift des Steckbriefs: "# Max M."
+function nameAusSteckbrief(text) {
+  const treffer = text.match(/^#[ \t]+(.+)$/m);
+  const name = treffer ? bereinigen(treffer[1]) : '';
+  return name ? kuerzen(name, 40) : null;
 }
 
 function bereinigen(text) {
@@ -428,11 +428,6 @@ function kuerzen(text, laenge = 60) {
   return zeichen.length > laenge ? `${zeichen.slice(0, laenge - 1).join('')}…` : String(text);
 }
 
-function erstesZeichen(text) {
-  const segmente = new Intl.Segmenter('de', { granularity: 'grapheme' }).segment(text);
-  const erstes = segmente[Symbol.iterator]().next().value;
-  return erstes ? erstes.segment : null;
-}
 
 function reviewText(zustand, nummer) {
   switch (zustand) {
