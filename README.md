@@ -6,6 +6,7 @@ Das gemeinsame GitHub-Repository der Automatisierungsklasse FST AUD 25. Hier üb
 - Klassenliste: https://yourworstdream.github.io/FSTAUD25/fortschritt.html
 - Hilfe: https://yourworstdream.github.io/FSTAUD25/hilfe.html
 - Anmelden: [Anmelde-Formular öffnen](https://github.com/Yourworstdream/FSTAUD25/issues/new?template=anmeldung.yml)
+- Lebenslauf-Generator: [lebenslauf/](lebenslauf/) – Lebenslauf erstellen und als Word, LibreOffice oder Webseite exportieren
 
 ## Die sieben Schritte
 
@@ -29,6 +30,7 @@ assets/             CSS und JavaScript der Seiten
 klasse.json         Klassenname, Anzahl Plätze, ausgeblendete Konten
 teilnehmer/         Ein Steckbrief pro Person (Schritt 3)
 projekt/            Das Wiki (Schritt 7)
+lebenslauf/         Lebenslauf-Generator (Python): Export als Word, ODT und interaktive Webseite
 .github/            Formulare, Actions, Skript und Tests für die Klassenliste
 ```
 
