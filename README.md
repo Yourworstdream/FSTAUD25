@@ -9,6 +9,7 @@ Das Klassen-Repository der Automatisierungsklasse **FST AUD 25**. Hier lernen wi
 | 📊 **Live-Fortschritt** | https://yourworstdream.github.io/FSTAUD25/fortschritt.html |
 | 📝 **Anmelden** | [Anmelde-Issue öffnen](https://github.com/Yourworstdream/FSTAUD25/issues/new?template=anmeldung.yml) |
 | 🆘 **Hilfe** | [Hilfe-Issue öffnen](https://github.com/Yourworstdream/FSTAUD25/issues/new?template=hilfe.yml) |
+| 📄 **Lebenslauf-Generator** | [lebenslauf/](lebenslauf/) – Lebenslauf erstellen und als Word, LibreOffice oder interaktive Webseite exportieren |
 
 ## Dein Weg in 7 Schritten
 
@@ -34,6 +35,7 @@ Jeder Schritt wird automatisch erkannt und erscheint etwa eine Minute später au
 ├── klasse.json                Klassenname, Anzahl Plätze, ausgeblendete Konten
 ├── teilnehmer/                Ein Steckbrief pro Person (Schritt 3)
 ├── projekt/                   Klassenprojekt: Automatisierungs-Wiki (Schritt 7)
+├── lebenslauf/                Lebenslauf-Generator (Python) – Export als Word, ODT, interaktive Webseite
 ├── CONTRIBUTING.md            Unsere Teamregeln
 └── .github/
     ├── ISSUE_TEMPLATE/        Formulare: Anmeldung, Hilfe, Idee
