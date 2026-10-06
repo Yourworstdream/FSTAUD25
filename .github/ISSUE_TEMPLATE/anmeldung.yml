@@ -1,4 +1,4 @@
-name: "📝 Anmeldung"
+name: "Anmeldung"
 description: Melde dich für das Klassen-Repository der FST AUD 25 an.
 title: "Anmeldung: "
 labels: ["anmeldung"]
@@ -6,14 +6,12 @@ body:
   - type: markdown
     attributes:
       value: |
-        Schön, dass du dabei bist! 👋
-        Nach dem Absenden lädt dich der Admin als Collaborator in dieses Repository ein – die Einladung kommt per E-Mail.
-
-        **Achtung:** Dieses Repository ist öffentlich. Gib nur deinen Vornamen und den Anfangsbuchstaben deines Nachnamens an.
+        Nach dem Absenden wirst du ins Repository eingeladen. Die Einladung kommt per E-Mail.
+        Das Repository ist öffentlich, deshalb bitte nur Vorname und Anfangsbuchstabe vom Nachnamen.
   - type: input
     id: name
     attributes:
-      label: Name (Vorname + Anfangsbuchstabe des Nachnamens)
+      label: Name (Vorname und Anfangsbuchstabe vom Nachnamen)
       placeholder: "z. B. Max M."
     validations:
       required: true
@@ -30,7 +28,7 @@ body:
   - type: checkboxes
     id: regeln
     attributes:
-      label: Teamregeln
+      label: Regeln
       options:
-        - label: Ich habe die [Teamregeln](https://github.com/Yourworstdream/FSTAUD25/blob/main/CONTRIBUTING.md) gelesen und halte mich daran.
+        - label: Ich halte mich an die [Regeln](https://github.com/Yourworstdream/FSTAUD25/blob/main/CONTRIBUTING.md).
           required: true

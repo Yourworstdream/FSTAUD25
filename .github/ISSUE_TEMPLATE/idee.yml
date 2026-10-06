@@ -1,5 +1,5 @@
-name: "🧩 Idee oder Aufgabe fürs Klassenprojekt"
-description: Schlag eine Verbesserung oder neue Aufgabe für das Automatisierungs-Wiki vor.
+name: "Idee fürs Wiki"
+description: Schlag eine Verbesserung oder neue Aufgabe für das Wiki vor.
 labels: ["projekt"]
 body:
   - type: textarea

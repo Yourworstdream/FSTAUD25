@@ -1,0 +1,22 @@
+name: Skript-Test
+
+# Prüft das Skript für die Klassenliste, sobald jemand es ändert.
+on:
+  pull_request:
+    paths: [".github/scripts/**", ".github/workflows/test.yml"]
+  push:
+    branches: [main]
+    paths: [".github/scripts/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - run: node --test .github/scripts/fortschritt.test.js
