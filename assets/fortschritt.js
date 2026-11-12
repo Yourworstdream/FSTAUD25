@@ -152,7 +152,7 @@
         ? 'Diese Seite funktioniert nur online über GitHub Pages. <a href="fortschritt.html?demo">Beispiel ansehen</a>'
         : 'Die Daten konnten gerade nicht geladen werden. Die Seite versucht es gleich noch mal.';
     } else if (daten && daten.aktualisiert && Date.now() - new Date(daten.aktualisiert).getTime() > VERALTET_NACH) {
-      html = `Die Daten sind vom ${escape(uhrzeit(daten.aktualisiert))} Uhr. Ist seitdem etwas auf GitHub passiert, läuft die Action gerade nicht.`;
+      html = `Die Daten sind vom ${escape(uhrzeit(daten.aktualisiert))} Uhr. Ist seitdem etwas auf GitHub passiert, läuft die automatische Aktualisierung gerade nicht.`;
     }
     $('hinweis').innerHTML = html;
     $('hinweis').hidden = !html;

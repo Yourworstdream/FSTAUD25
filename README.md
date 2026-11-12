@@ -34,7 +34,7 @@ Das gemeinsame GitHub-Repository der Automatisierungsklasse FST AUD 25. Hier üb
 
 ```
 index.html          Anleitung
-fortschritt.html    Klassenliste mit dem Stand aller 12 Plätze und „Jetzt zu tun“
+fortschritt.html    Klassenliste: Stand aller 12 Plätze und „Jetzt zu tun“
 quiz.html           Sechs Fragen zur Selbstkontrolle
 hilfe.html          Häufige Probleme, Begriffe, Regeln
 assets/             CSS und JavaScript der Seiten

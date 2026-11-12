@@ -15,16 +15,6 @@ body:
       placeholder: "z. B. Max M."
     validations:
       required: true
-  - type: dropdown
-    id: erfahrung
-    attributes:
-      label: Hast du schon mit Git oder GitHub gearbeitet?
-      options:
-        - Nein, noch nie
-        - Ein bisschen
-        - Ja, regelmäßig
-    validations:
-      required: true
   - type: checkboxes
     id: regeln
     attributes:
