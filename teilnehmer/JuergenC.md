@@ -1,0 +1,6 @@
+# JuergenC
+
+- Das will ich lernen: Mit Git und GitHub im Team arbeiten
+- Lieblingsthema in der Automatisierung:
+#Ich bin dabei
+## Test2
