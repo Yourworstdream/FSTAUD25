@@ -20,10 +20,10 @@ function issue(nummer, autor, titel, { labels = [], kommentare = [], body = '', 
   };
 }
 
-function pr(nummer, autor, { gemerged = null, dateien = [], reviews = [], fork = false } = {}) {
+function pr(nummer, autor, { gemerged = null, dateien = [], reviews = [], fork = false, state = gemerged ? 'MERGED' : 'OPEN' } = {}) {
   return {
     number: nummer, title: `PR ${nummer}`, url: `https://github.com/o/r/pull/${nummer}`, createdAt: `2026-10-01T09:${String(nummer).padStart(2, '0')}:00Z`,
-    mergedAt: gemerged, isCrossRepository: fork, author: U(autor), commits: { totalCount: 1 },
+    state, mergedAt: gemerged, isCrossRepository: fork, author: U(autor), commits: { totalCount: 1 },
     files: { nodes: dateien.map((p) => ({ path: p })) },
     reviews: { nodes: reviews.map(([wer, state, zeit]) => ({ author: U(wer), state, submittedAt: zeit, url: `https://github.com/o/r/pull/${nummer}#r` })) },
     comments: { nodes: [] },
@@ -56,7 +56,10 @@ async function ausfuehren({ issues = [], pulls = [], mitglieder = [OWNER], steck
           if (pages) return { data: { build_type: 'workflow' } };
           throw Object.assign(new Error('Not Found'), { status: 404 });
         },
-        listCollaborators: async () => ({ data: mitglieder.map((login) => ({ login, avatar_url: `https://avatars.example/${login}?v=4` })) }),
+        listCollaborators: async () => {
+          if (!mitglieder) throw Object.assign(new Error('Forbidden'), { status: 403 }); // null: Liste nicht lesbar
+          return { data: mitglieder.map((login) => ({ login, avatar_url: `https://avatars.example/${login}?v=4` })) };
+        },
       },
       issues: {
         listLabelsForRepo: async () => ({ data: [] }),
@@ -137,31 +140,109 @@ test('ordnet einen falsch benannten Steckbrief der Person zu, die ihn gemerged h
   assert.ok(!daten.teilnehmer.some((t) => t.login === 'Mara'));
 });
 
-test('begrüßt neue Anmeldungen und setzt das Label', async () => {
+test('begrüßt offene Anmeldungen bei jedem Lauf und setzt das Label', async () => {
+  // Der Lauf zum Ereignis „opened“ kann verdrängt worden sein – ein späterer Lauf holt die Begrüßung nach.
   const neu = issue(5, 'aylin', 'Anmeldung: Aylin S.');
-  const { aufrufe } = await ausfuehren({
-    issues: [neu],
-    context: { eventName: 'issues', payload: { action: 'opened', issue: { number: 5, title: neu.title, user: { login: 'aylin' }, labels: [] } } },
-  });
+  const { aufrufe } = await ausfuehren({ issues: [neu], context: { eventName: 'schedule' } });
   assert.ok(aufrufe.some(([art, nr]) => art === 'addLabels' && nr === 5));
-  const gruss = aufrufe.find(([art, nr]) => art === 'kommentar' && nr === 5);
-  assert.match(gruss[2], /angenommen/);
+  const gruss = aufrufe.filter(([art, nr]) => art === 'kommentar' && nr === 5);
+  assert.strictEqual(gruss.length, 1);
+  assert.match(gruss[0][2], /danke für deine Anmeldung/);
+  assert.match(gruss[0][2], /angenommen/);
+});
+
+test('begrüßt nicht doppelt und lässt vorhandene Labels in Ruhe', async () => {
+  const begruesst = issue(5, 'aylin', 'Anmeldung: Aylin S.', { labels: ['anmeldung'], kommentare: [['bot', '2026-10-01T09:00:00Z']] });
+  const { aufrufe } = await ausfuehren({ issues: [begruesst], context: { eventName: 'push' } });
+  assert.ok(!aufrufe.some(([art]) => art === 'kommentar' || art === 'addLabels' || art === 'update'));
 });
 
 test('„angenommen“ ohne Einladung bekommt einen Hinweis, mit Einladung wird geschlossen', async () => {
-  const anmeldung = issue(6, 'deniz', 'Anmeldung: Deniz A.', { labels: ['anmeldung'] });
-  const ereignis = {
-    eventName: 'issue_comment',
-    payload: { action: 'created', comment: { user: { login: 'deniz' } }, issue: { number: 6, title: anmeldung.title, state: 'open', user: { login: 'deniz' }, labels: [{ name: 'anmeldung' }] } },
-  };
+  const anmeldung = issue(6, 'deniz', 'Anmeldung: Deniz A.', {
+    labels: ['anmeldung'],
+    kommentare: [['bot', '2026-10-01T09:00:00Z'], ['deniz', '2026-10-01T09:10:00Z']],
+  });
 
-  const ohne = await ausfuehren({ issues: [anmeldung], context: ereignis });
-  assert.ok(ohne.aufrufe.some(([art, nr, text]) => art === 'kommentar' && nr === 6 && /noch nicht angenommen/.test(text)));
+  const ohne = await ausfuehren({ issues: [anmeldung] });
+  const hinweise = ohne.aufrufe.filter(([art, nr, text]) => art === 'kommentar' && nr === 6 && /noch nicht angenommen/.test(text));
+  assert.strictEqual(hinweise.length, 1);
   assert.ok(!ohne.aufrufe.some(([art]) => art === 'update'));
 
-  const mit = await ausfuehren({ issues: [anmeldung], context: ereignis, mitglieder: [OWNER, 'deniz'] });
+  // Bot hat schon geantwortet: kein zweiter Hinweis
+  const beantwortet = issue(6, 'deniz', anmeldung.title, {
+    labels: ['anmeldung'],
+    kommentare: [['bot', '2026-10-01T09:00:00Z'], ['deniz', '2026-10-01T09:10:00Z'], ['bot', '2026-10-01T09:11:00Z']],
+  });
+  assert.ok(!(await ausfuehren({ issues: [beantwortet] })).aufrufe.some(([art]) => art === 'kommentar'));
+
+  // Mitgliederliste nicht lesbar: lieber schweigen
+  assert.ok(!(await ausfuehren({ issues: [anmeldung], mitglieder: null })).aufrufe.some(([art]) => art === 'kommentar'));
+
+  const mit = await ausfuehren({ issues: [anmeldung], mitglieder: [OWNER, 'deniz'] });
+  assert.ok(mit.aufrufe.some(([art, nr, text]) => art === 'kommentar' && nr === 6 && /hat die Einladung angenommen/.test(text)));
   assert.ok(mit.aufrufe.some(([art, nr, state]) => art === 'update' && nr === 6 && state === 'closed'));
   assert.ok(mit.person('deniz').erledigt.team);
+});
+
+test('schließt Anmeldungen von Personen, die schon im Team sind, ohne Begrüßung', async () => {
+  const { aufrufe } = await ausfuehren({ issues: [issue(7, 'ole', 'Anmeldung: Ole')], mitglieder: [OWNER, 'ole'] });
+  const texte = aufrufe.filter(([art]) => art === 'kommentar').map(([, , text]) => text);
+  assert.strictEqual(texte.length, 1);
+  assert.match(texte[0], /du bist schon im Team/);
+  assert.ok(aufrufe.some(([art, nr, state]) => art === 'update' && nr === 7 && state === 'closed'));
+});
+
+test('offen: zeigt, wer auf was wartet, die längste Wartezeit zuerst', async () => {
+  const { daten } = await ausfuehren({
+    mitglieder: [OWNER, 'lena', 'jonas', 'mia', 'ben'],
+    issues: [
+      issue(1, 'tim', 'Anmeldung: Tim B.', { labels: ['anmeldung'], kommentare: [['bot', '2026-10-01T08:30:00Z']] }),
+      issue(2, 'fremd', 'Hilfe beim Klonen', { labels: ['Hilfe'] }),
+      issue(3, 'lena', 'Erledigt', { labels: ['hilfe'], state: 'CLOSED' }),
+      issue(4, 'lena', 'Anmeldung: Lena K.', { labels: ['anmeldung'], state: 'CLOSED' }),
+    ],
+    pulls: [
+      pr(10, 'lena'),
+      pr(11, 'jonas', { reviews: [['lena', 'APPROVED', '2026-10-01T12:00:00Z'], ['lena', 'COMMENTED', '2026-10-01T12:30:00Z']] }),
+      pr(12, 'mia', { reviews: [['lena', 'APPROVED', '2026-10-01T10:00:00Z'], ['jonas', 'CHANGES_REQUESTED', '2026-10-01T11:00:00Z']] }),
+      pr(13, 'ben', { reviews: [['lena', 'CHANGES_REQUESTED', '2026-10-01T10:00:00Z'], ['lena', 'APPROVED', '2026-10-01T13:00:00Z']] }),
+      pr(14, 'ben', { reviews: [['ben', 'APPROVED', '2026-10-01T10:00:00Z'], ['lena', 'PENDING', null], ['jonas', 'DISMISSED', '2026-10-01T10:30:00Z']] }),
+      pr(15, 'lena', { gemerged: '2026-10-01T14:00:00Z' }),
+      pr(16, 'lena', { state: 'CLOSED' }),
+      pr(17, 'fremd', { fork: true }),
+    ],
+  });
+  const kurz = daten.offen.map((e) => [e.typ, e.login, e.seit]);
+  assert.deepStrictEqual(kurz, [
+    ['einladung', 'tim', '2026-10-01T08:01:00Z'],
+    ['hilfe', 'fremd', '2026-10-01T08:02:00Z'],
+    ['review', 'lena', '2026-10-01T09:10:00Z'],
+    ['review', 'ben', '2026-10-01T09:14:00Z'],
+    ['aendern', 'mia', '2026-10-01T11:00:00Z'],
+    ['merge', 'jonas', '2026-10-01T12:00:00Z'],
+    ['merge', 'ben', '2026-10-01T13:00:00Z'],
+  ]);
+  assert.deepStrictEqual(daten.offen[0], {
+    typ: 'einladung', login: 'tim', name: 'Tim B.', text: 'wartet auf die Einladung',
+    url: 'https://github.com/o/r/issues/1', seit: '2026-10-01T08:01:00Z',
+  });
+  const text = (typ, login) => daten.offen.find((e) => e.typ === typ && e.login === login).text;
+  assert.strictEqual(text('aendern', 'mia'), 'soll Pull Request #12 überarbeiten');
+  assert.strictEqual(text('merge', 'jonas'), 'kann Pull Request #11 mergen');
+  assert.strictEqual(text('review', 'lena'), 'wartet auf ein Review für Pull Request #10');
+  assert.strictEqual(text('hilfe', 'fremd'), 'braucht Hilfe (Issue #2)');
+  assert.strictEqual(daten.offen.find((e) => e.typ === 'merge' && e.login === 'jonas').url, 'https://github.com/o/r/pull/11');
+});
+
+test('offen: ohne lesbare Mitgliederliste keine Einladungs-Einträge, PRs ohne state gelten nach mergedAt', async () => {
+  const ohneState = { ...pr(10, 'tim'), state: undefined };
+  const gemergedOhneState = { ...pr(11, 'tim', { gemerged: '2026-10-01T12:00:00Z' }), state: undefined };
+  const { daten } = await ausfuehren({
+    mitglieder: null,
+    issues: [issue(1, 'tim', 'Anmeldung: Tim B.', { labels: ['anmeldung'] })],
+    pulls: [ohneState, gemergedOhneState],
+  });
+  assert.deepStrictEqual(daten.offen.map((e) => [e.typ, e.login]), [['review', 'tim']]);
 });
 
 test('veröffentlicht nur, wenn GitHub Pages eingeschaltet ist', async () => {

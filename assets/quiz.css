@@ -1,0 +1,23 @@
+/* Quiz – ergänzt nur, was style.css nicht schon hat */
+
+.frage { border: 0; border-top: 1px solid var(--linie); margin: 0; padding: 1.4rem 0 .4rem; min-width: 0; }
+.frage legend { padding: 0; font-weight: 600; width: 100%; }
+.frage legend .leise { display: block; font-weight: 400; }
+.frage:focus { outline: none; }
+.antwort { display: block; width: 100%; text-align: left; margin: .5rem 0 0; padding: .55rem .8rem; font: inherit; line-height: 1.45; color: var(--text); background: var(--bg); border: 1px solid var(--linie); border-radius: 6px; cursor: pointer; overflow-wrap: anywhere; }
+.antwort:hover { border-color: var(--muted); }
+.antwort[aria-disabled="true"] { cursor: default; }
+.antwort[aria-disabled="true"]:hover { border-color: var(--linie); }
+.antwort.richtig { border-color: var(--ok); background: var(--ok-flaeche); }
+.antwort.falsch { border-color: var(--fehler); }
+.antwort.richtig:hover { border-color: var(--ok); }
+.antwort.falsch:hover { border-color: var(--fehler); }
+.antwort .marke { display: block; font-size: .88rem; font-weight: 600; }
+.antwort.richtig .marke { color: var(--ok); }
+.antwort.falsch .marke { color: var(--fehler); }
+.rueckmeldung { margin: .7rem 0 .8rem; min-height: 1.6rem; }
+.rueckmeldung:empty { margin: 0; min-height: 0; }
+.ergebnis { border-top: 1px solid var(--linie); margin-top: 1.2rem; }
+.ergebnis:empty { display: none; }
+.ergebnis { padding-top: 1.4rem; }
+.ergebnis .summe { font-size: 1.25rem; font-weight: 600; margin-bottom: .4rem; }

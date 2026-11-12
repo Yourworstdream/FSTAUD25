@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz · FST AUD 25</title>
+<meta name="description" content="Sechs kurze Fragen zu den wichtigsten GitHub-Begriffen der FST AUD 25.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/quiz.css">
+<script src="assets/common.js" defer></script>
+<script src="assets/quiz.js" defer></script>
+</head>
+<body>
+
+<header class="kopf">
+  <div class="kopf-innen">
+    <a class="seitenname" href="./">FST AUD 25</a>
+    <nav aria-label="Seiten">
+      <a href="./">Anleitung</a>
+      <a href="fortschritt.html">Fortschritt</a>
+      <a href="quiz.html" aria-current="page">Quiz</a>
+      <a href="hilfe.html">Hilfe</a>
+      <a href="https://github.com/Yourworstdream/FSTAUD25" data-repo="">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>Verstanden?</h1>
+  <p>Sechs kurze Fragen zu den wichtigsten Begriffen. Das dauert etwa 3 Minuten. Es wird nichts gespeichert und nichts gesendet.</p>
+
+  <form id="quiz" onsubmit="return false"></form>
+
+  <div id="ergebnis" class="ergebnis" aria-live="polite"></div>
+  <p><button type="button" class="knopf leicht" id="nochmal" hidden>Noch einmal</button></p>
+
+  <noscript><p>Für das Quiz braucht die Seite JavaScript. Die Begriffe stehen auch in der <a href="hilfe.html">Hilfe</a>.</p></noscript>
+</main>
+
+<footer class="fuss">
+  FST AUD 25 · <a href="./">Zur Anleitung</a>
+</footer>
+
+</body>
+</html>

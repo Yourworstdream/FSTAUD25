@@ -20,6 +20,7 @@
     <nav aria-label="Seiten">
       <a href="./" aria-current="page">Anleitung</a>
       <a href="fortschritt.html">Fortschritt</a>
+      <a href="quiz.html">Quiz</a>
       <a href="hilfe.html">Hilfe</a>
       <a href="https://github.com/Yourworstdream/FSTAUD25" data-repo="">GitHub</a>
     </nav>
@@ -29,7 +30,23 @@
 <main>
   <h1>GitHub-Anleitung für die FST AUD 25</h1>
   <p class="nur-druck druck-kopf"><img src="assets/qr-anleitung.svg" alt="">Online mit allen Links und dem Anmeldeformular:<br>yourworstdream.github.io/FSTAUD25</p>
-  <p>Wir arbeiten dieses Schuljahr gemeinsam in einem GitHub-Repository. Diese Seite bringt dich in sieben Schritten dorthin. Du brauchst nur einen Browser, rechne mit etwa 30 Minuten. Am besten suchst du dir einen Partner aus der Klasse, ihr prüft euch in Schritt 4 und 5 gegenseitig.</p>
+  <p>Wir arbeiten dieses Schuljahr gemeinsam in einem GitHub-Repository. Diese Seite bringt dich in sieben Schritten dorthin. Du brauchst nur einen Browser und ein bis zwei Stunden. Such dir einen Partner aus der Klasse, ihr prüft euch in Schritt 4 und 5 gegenseitig.</p>
+
+  <h2 class="prinzip-titel">So funktioniert GitHub</h2>
+  <p>Ein <b>Repository</b> ist ein Projektordner, der sich jede Änderung merkt. Der geprüfte Stand darin heißt <b>main</b>. Wer etwas ändern will, arbeitet auf einem eigenen Zweig, einem <b>Branch</b>, und speichert dort mit einem <b>Commit</b>. Mit einem <b>Pull Request</b> schlägt man die Änderung vor. Eine zweite Person prüft sie, das ist das <b>Review</b>. Danach wird sie in main übernommen, das ist der <b>Merge</b>.</p>
+  <svg class="ablauf" viewBox="0 0 640 132" role="img" aria-label="Von main zweigt ein Branch ab. Darauf liegen zwei Commits. Nach Pull Request und Review führt der Merge den Branch zurück in main.">
+    <line x1="16" y1="96" x2="624" y2="96" class="l-main"/>
+    <path d="M150 96 C 185 96, 180 40, 220 40 L 400 40 C 440 40, 435 96, 470 96" class="l-branch"/>
+    <circle cx="70" cy="96" r="7" class="p-main"/><circle cx="150" cy="96" r="7" class="p-main"/>
+    <circle cx="260" cy="40" r="7" class="p-branch"/><circle cx="350" cy="40" r="7" class="p-branch"/>
+    <circle cx="470" cy="96" r="8" class="p-merge"/><circle cx="570" cy="96" r="7" class="p-main"/>
+    <text x="16" y="122">main</text>
+    <text x="222" y="20">dein Branch</text>
+    <text x="260" y="66" text-anchor="middle" class="klein">Commit</text>
+    <text x="350" y="66" text-anchor="middle" class="klein">Commit</text>
+    <text x="470" y="122" text-anchor="middle">Pull Request, Review, Merge</text>
+  </svg>
+  <p>Diesen Ablauf machst du heute zweimal: erst mit einem Steckbrief, dann mit einer Wiki-Seite.</p>
 
   <ol class="uebersicht" id="uebersicht">
     <li data-schritt="anmeldung"><a href="#schritt-1">Konto erstellen und anmelden</a></li>
@@ -47,9 +64,9 @@
   </div>
 
   <section class="schritt" id="schritt-1">
-    <p class="schritt-nr">Schritt 1 von 7</p>
+    <p class="schritt-nr" data-dauer="etwa 10 Minuten">Schritt 1 von 7 · etwa 10 Minuten</p>
     <h2>Konto erstellen und anmelden</h2>
-    <p>Falls du noch kein GitHub-Konto hast, registriere dich auf <a href="https://github.com/signup">github.com/signup</a>. Merk dir deinen Benutzernamen. GitHub verlangt eine Zwei-Faktor-Anmeldung, das geht am einfachsten mit einer Authenticator-App auf dem Handy.</p>
+    <p>Falls du noch kein GitHub-Konto hast, registriere dich auf <a href="https://github.com/signup">github.com/signup</a>. Merk dir deinen Benutzernamen. Fragt GitHub nach einer Zwei-Faktor-Anmeldung, kannst du das heute überspringen und in den nächsten Tagen einrichten.</p>
     <p>Dann trägst du dich hier ein. Danach öffnet sich GitHub mit einem fertig ausgefüllten Formular, dort klickst du nur noch auf <b>Create</b>.</p>
 
     <p class="nur-druck">Das Formular dazu findest du auf der Online-Seite (QR-Code oben).</p>
@@ -73,16 +90,17 @@
   </section>
 
   <section class="schritt" id="schritt-2">
-    <p class="schritt-nr">Schritt 2 von 7</p>
+    <p class="schritt-nr" data-dauer="etwa 5 Minuten">Schritt 2 von 7 · etwa 5 Minuten</p>
     <h2>Einladung annehmen</h2>
     <p>Nach deiner Anmeldung lädt dich @Yourworstdream ins Repository ein. Du bekommst dazu eine E-Mail von GitHub. Schau auch im Spam-Ordner nach.</p>
     <p>Klick in der E-Mail auf <b>View invitation</b> und dann auf <b>Accept invitation</b>. Du kannst die Einladung auch <a href="https://github.com/Yourworstdream/FSTAUD25/invitations" data-repo="/invitations">direkt hier öffnen</a>. Sie gilt 7 Tage.</p>
+    <p>Solange du wartest, steht in der <a href="fortschritt.html">Klassenliste</a> hinter deinem Namen „wartet auf Einladung“.</p>
     <p>Schreib danach in <a id="anmelde-issue-link" href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+label%3Aanmeldung">dein Anmelde-Issue</a> kurz „angenommen“. Dann wird es geschlossen und dein Häkchen erscheint gleich in der Klassenliste.</p>
     <p class="fertig"><b>Fertig, wenn</b> dein Anmelde-Issue geschlossen ist. Bietet dir GitHub an, das Repository zu „forken“, ist die Einladung noch nicht angenommen.</p>
   </section>
 
   <section class="schritt" id="schritt-3">
-    <p class="schritt-nr">Schritt 3 von 7</p>
+    <p class="schritt-nr" data-dauer="etwa 10 Minuten">Schritt 3 von 7 · etwa 10 Minuten</p>
     <h2>Steckbrief vorschlagen</h2>
     <p>Am Hauptstand des Projekts (<code>main</code>) ändert niemand direkt etwas. Du machst deine Änderung auf einem eigenen Zweig, einem <b>Branch</b>, und schlägst sie dann vor. Dieser Vorschlag heißt <b>Pull Request</b>.</p>
     <ol>
@@ -96,32 +114,32 @@
   </section>
 
   <section class="schritt" id="schritt-4">
-    <p class="schritt-nr">Schritt 4 von 7</p>
+    <p class="schritt-nr" data-dauer="etwa 10 Minuten">Schritt 4 von 7 · etwa 10 Minuten</p>
     <h2>Review abwarten und mergen</h2>
-    <p>Jetzt schaut sich eine andere Person deinen Pull Request an. Gibt sie ihn frei (<b>Approve</b>), klickst du unten auf <b>Merge pull request</b> und dann auf <b>Confirm merge</b>. Damit ist deine Änderung im Hauptstand. Den Branch kannst du danach mit <b>Delete branch</b> löschen.</p>
+    <p>Jetzt schaut sich eine andere Person deinen Pull Request an, am besten dein Partner. In der <a href="fortschritt.html">Klassenliste</a> steht bei dir so lange „wartet auf Review“. Gibt sie ihn frei (<b>Approve</b>), klickst du unten auf <b>Merge pull request</b> und dann auf <b>Confirm merge</b>. Damit ist deine Änderung im Hauptstand. Den Branch kannst du danach mit <b>Delete branch</b> löschen.</p>
     <p>Soll noch etwas geändert werden, bearbeite die Datei direkt im Pull Request unter <b>Files changed</b>. Einen neuen Pull Request brauchst du dafür nicht.</p>
     <p class="fertig"><b>Fertig, wenn</b> oben ein lila „Merged“ steht. Ist der Merge-Knopf grau, fehlt noch die Freigabe.</p>
   </section>
 
   <section class="schritt" id="schritt-5">
-    <p class="schritt-nr">Schritt 5 von 7</p>
+    <p class="schritt-nr" data-dauer="etwa 5 Minuten">Schritt 5 von 7 · etwa 5 Minuten</p>
     <h2>Einen Pull Request prüfen</h2>
-    <p>Öffne einen <a href="https://github.com/Yourworstdream/FSTAUD25/pulls" data-repo="/pulls">offenen Pull Request</a> von jemand anderem. Unter <b>Files changed</b> siehst du, was geändert wurde: Grün ist neu, Rot wurde gelöscht.</p>
+    <p>Öffne einen <a href="https://github.com/Yourworstdream/FSTAUD25/pulls" data-repo="/pulls">offenen Pull Request</a> von jemand anderem. Wer gerade auf ein Review wartet, steht in der <a href="fortschritt.html">Klassenliste</a> unter „Jetzt zu tun“. Unter <b>Files changed</b> siehst du, was geändert wurde: Grün ist neu, Rot wurde gelöscht.</p>
     <p>Klick oben rechts auf <b>Review changes</b>, wähle <b>Approve</b>, wenn alles passt, oder <b>Request changes</b>, wenn etwas fehlt, und schreib kurz dazu, warum. Bleib dabei freundlich und konkret.</p>
     <p class="fertig"><b>Fertig, wenn</b> im Pull Request „dein-name approved these changes“ steht.</p>
   </section>
 
   <section class="schritt" id="schritt-6">
-    <p class="schritt-nr">Schritt 6 von 7</p>
+    <p class="schritt-nr" data-dauer="etwa 5 Minuten">Schritt 6 von 7 · etwa 5 Minuten</p>
     <h2>In einem Issue mitreden</h2>
     <p>Issues sind unsere Aufgabenliste. Öffne eines der <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+label%3Athema" data-repo="/issues?q=is%3Aissue+label%3Athema">Themen fürs Wiki</a> und schreib unten einen Kommentar, zum Beispiel welches Thema dich interessiert.</p>
     <p class="fertig"><b>Fertig, wenn</b> dein Kommentar unter dem Issue steht.</p>
   </section>
 
   <section class="schritt" id="schritt-7">
-    <p class="schritt-nr">Schritt 7 von 7</p>
+    <p class="schritt-nr" data-dauer="etwa 20 Minuten">Schritt 7 von 7 · etwa 20 Minuten</p>
     <h2>Eine Wiki-Seite schreiben</h2>
-    <p>Zusammen schreiben wir ein kleines Wiki zur Automatisierungstechnik. Es gibt 12 Themen, jede Person übernimmt eins.</p>
+    <p>Zusammen schreiben wir ein kleines Wiki zur Automatisierungstechnik. Es gibt 12 Themen, jede Person übernimmt eins. Für heute reichen drei Sätze unter „Worum geht es?“. Ausbauen kannst du die Seite später, wieder mit Branch und Pull Request.</p>
     <ol>
       <li>Such dir bei den <a href="https://github.com/Yourworstdream/FSTAUD25/issues?q=is%3Aissue+is%3Aopen+label%3Athema" data-repo="/issues?q=is%3Aissue+is%3Aopen+label%3Athema">Themen</a> ein freies aus, schreib „Ich übernehme das“ und trag dich rechts bei <b>Assignees</b> ein.</li>
       <li>Klick im Themen-Issue auf den Link zum Anlegen der Datei, der Dateiname ist dort schon eingetragen. Den Text kopierst du aus der Vorlage, die im Issue verlinkt ist.</li>
@@ -131,7 +149,8 @@
   </section>
 
   <section class="schritt">
-    <p>Das war's. Wenn du irgendwo hängst, schau auf die <a href="hilfe.html">Hilfe-Seite</a> oder frag in der Klasse.</p>
+    <p>Das war's. Zum Schluss kannst du mit <a href="quiz.html">sechs kurzen Fragen</a> prüfen, ob alles sitzt.</p>
+    <p>Wenn du irgendwo hängst, schau auf die <a href="hilfe.html">Hilfe-Seite</a>, frag deinen Partner oder schreib ein <a href="https://github.com/Yourworstdream/FSTAUD25/issues/new?template=hilfe.yml" data-repo="/issues/new?template=hilfe.yml">Hilfe-Issue</a>. Das erscheint dann in der Klassenliste.</p>
   </section>
 </main>
 

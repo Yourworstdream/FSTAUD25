@@ -85,6 +85,18 @@ main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 2.5rem; }
 .uebersicht li.erledigt a { color: var(--muted); }
 .uebersicht li.erledigt::after { content: " ✓"; color: var(--ok); font-weight: 700; }
 
+.prinzip-titel { margin-top: 2rem; }
+.ablauf { display: block; width: 100%; max-width: 34rem; height: auto; margin: .4rem 0 1rem; }
+.ablauf line, .ablauf path { fill: none; stroke-width: 3; stroke-linecap: round; }
+.ablauf .l-main { stroke: var(--muted); }
+.ablauf .l-branch { stroke: var(--akzent); }
+.ablauf circle { stroke-width: 3; fill: var(--bg); }
+.ablauf .p-main { stroke: var(--muted); }
+.ablauf .p-branch { stroke: var(--akzent); }
+.ablauf .p-merge { stroke: var(--ok); fill: var(--ok); }
+.ablauf text { fill: var(--text); font-size: 14px; font-weight: 600; }
+.ablauf text.klein { fill: var(--muted); font-size: 12px; font-weight: 400; }
+
 .schritt { border-top: 1px solid var(--linie); padding: 1.8rem 0 .8rem; }
 .schritt-nr { color: var(--muted); font-size: .9rem; margin: 0 0 .15rem; }
 .schritt-nr .ok { font-weight: 600; }
@@ -163,9 +175,43 @@ table.liste { width: 100%; border-collapse: collapse; font-size: .95rem; }
 
 @keyframes markieren { from { background: var(--markiert); } }
 
-/* Vollbild für Beamer oder Smartboard */
-html.vollbild { font-size: 125%; }
-html.vollbild .kopf, html.vollbild .fuss { display: none; }
+/* Jetzt zu tun: wer gerade auf jemand anderen wartet */
+.seite > section + section { margin-top: 1.6rem; }
+.liste .stand.wartet { color: var(--text); }
+.offen h3 { display: flex; align-items: baseline; gap: .4rem; font-size: .95rem; margin: .9rem 0 .1rem; }
+.offen h3:first-child { margin-top: 0; }
+.offen .zahl { color: var(--muted); font-weight: 400; }
+.offen .aktion { margin-left: auto; font-size: .9rem; font-weight: 400; }
+.offen ul { list-style: none; padding: 0; margin: 0; }
+.offen li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .5rem; padding: .3rem 0; border-bottom: 1px solid var(--linie); font-size: .93rem; margin: 0; }
+.offen li a { color: inherit; text-decoration: none; }
+.offen li a:hover { text-decoration: underline; }
+.offen .login { color: var(--muted); }
+.offen .seit { margin-left: auto; color: var(--muted); font-size: .85rem; white-space: nowrap; }
+
+/* Beamer-Ansicht: alles auf einem Bildschirm, die Schrift richtet sich nach der Bildgröße */
+html.vollbild { font-size: clamp(12px, min(2.1vh, 1.45vw), 28px); }
+html.vollbild body { overflow: hidden; }
+html.vollbild .kopf, html.vollbild .fuss, html.vollbild .legende, html.vollbild .person small { display: none; }
+html.vollbild main { max-width: none; height: 100vh; padding: 1rem 1.5rem; display: flex; flex-direction: column; }
+html.vollbild h1 { font-size: 1.5rem; margin: 0 0 .2rem; }
+html.vollbild .zeile { margin-bottom: .7rem; }
+html.vollbild .raster { flex: 1; min-height: 0; grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr); gap: 2rem; }
+html.vollbild .raster > div { min-height: 0; }
+html.vollbild table.liste { height: 100%; font-size: 1.05rem; }
+html.vollbild .liste th, html.vollbild .liste td { padding-top: 0; padding-bottom: 0; }
+html.vollbild .liste thead th:not(:first-child) { width: 3.3rem; }
+html.vollbild .liste thead th.stand { width: 9.5rem; }
+html.vollbild .liste .stand { font-size: .85em; }
+html.vollbild .person img, html.vollbild .person .ini { width: 1.5em; height: 1.5em; }
+html.vollbild .seite { display: flex; flex-direction: column; overflow: hidden; }
+html.vollbild #offen-bereich { flex: 0 1 auto; min-height: 0; overflow: hidden; }
+html.vollbild .verlauf-bereich { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; }
+/* Einträge, die nicht mehr ganz passen, rutschen in eine unsichtbare zweite Spalte statt halb abgeschnitten zu werden */
+html.vollbild .verlauf { flex: 1; min-height: 0; display: flex; flex-flow: column wrap; align-content: flex-start; overflow: hidden; }
+html.vollbild .verlauf li { width: 100%; }
+html.vollbild .qr { flex: none; margin-top: .8rem; }
+html.vollbild .qr img { width: 6.5rem; height: 6.5rem; }
 
 /* Ausdruck als Handzettel */
 .nur-druck { display: none; }

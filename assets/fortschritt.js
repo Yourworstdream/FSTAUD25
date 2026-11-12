@@ -1,4 +1,4 @@
-/* Klassenliste: lädt fortschritt.json alle 20 Sekunden neu.
+/* Klassenliste: lädt fortschritt.json alle 10 Sekunden neu.
    Die Datei berechnet die Action .github/workflows/fortschritt.yml nach jeder Aktivität im Repository. */
 (() => {
   'use strict';
@@ -7,9 +7,19 @@
   const params = new URLSearchParams(location.search);
   const DEMO = params.has('demo');
   const ICH = (params.get('ich') || '').toLowerCase();
-  const INTERVALL = DEMO ? 5000 : 20000;
+  const BEAMER = params.has('beamer');
+  const INTERVALL = DEMO ? 5000 : 10000;
   const VERALTET_NACH = 24 * 60 * 60 * 1000; // GitHub startet geplante Läufe oft nur alle paar Stunden
   const HAKEN = '<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  // Wer wartet worauf: Reihenfolge = Dringlichkeit. Die Typen liefert .github/scripts/fortschritt.js.
+  const OFFEN = [
+    { typ: 'hilfe', titel: 'Braucht Hilfe', kurz: 'braucht Hilfe' },
+    { typ: 'einladung', titel: 'Wartet auf die Einladung', kurz: 'wartet auf Einladung' },
+    { typ: 'aendern', titel: 'Soll überarbeiten', kurz: 'soll überarbeiten' },
+    { typ: 'merge', titel: 'Kann mergen', kurz: 'kann mergen' },
+    { typ: 'review', titel: 'Wartet auf ein Review', kurz: 'wartet auf Review' },
+  ];
 
   const $ = (id) => document.getElementById(id);
   let daten = null;
@@ -26,6 +36,10 @@
       .filter((t) => t && t.login)
       .map((t) => ({ ...t, name: t.name || t.login, erledigt: t.erledigt || {} }))
       .sort((a, b) => a.name.localeCompare(b.name, 'de'));
+  }
+
+  function offenListe() {
+    return ((daten && daten.offen) || []).filter((o) => o && o.login && OFFEN.some((art) => art.typ === o.typ));
   }
 
   function personHtml(t) {
@@ -46,6 +60,15 @@
     const kopf = `<thead><tr><th scope="col">Name</th>${SCHRITTE.map((s) =>
       `<th scope="col" title="${s.nr}: ${escape(s.text)}">${s.nr}<span class="wort">${escape(s.kurz)}</span></th>`).join('')}<th scope="col" class="stand">Stand</th></tr></thead>`;
 
+    const offen = offenListe();
+    const haengtAn = (t) => OFFEN.find((art) => offen.some((o) => o.typ === art.typ && String(o.login).toLowerCase() === key(t)));
+    const standHtml = (t) => {
+      const art = haengtAn(t);
+      const n = anzahlErledigt(t);
+      if (art) return `<td class="stand wartet" title="${n} von 7 Schritten">${escape(art.kurz)}</td>`;
+      return `<td class="stand">${n === SCHRITTE.length ? 'fertig' : `${n}/7`}</td>`;
+    };
+
     const zeilen = liste.map((t) => {
       const zellen = SCHRITTE.map((s) => {
         const id = `${key(t)}|${s.id}`;
@@ -53,7 +76,7 @@
           ? `<td class="ja${neu(id) ? ' neu' : ''}" title="${escape(s.text)}">${HAKEN}<span class="visuell-versteckt">erledigt</span></td>`
           : '<td class="nein"><span class="visuell-versteckt">offen</span></td>';
       }).join('');
-      return `<tr${key(t) === ICH ? ' class="ich"' : ''}><th scope="row">${personHtml(t)}</th>${zellen}<td class="stand">${anzahlErledigt(t)}/7</td></tr>`;
+      return `<tr${key(t) === ICH ? ' class="ich"' : ''}><th scope="row">${personHtml(t)}</th>${zellen}${standHtml(t)}</tr>`;
     });
     for (let i = liste.length; i < plaetze; i++) {
       zeilen.push(`<tr class="frei"><th scope="row">frei</th>${'<td></td>'.repeat(SCHRITTE.length)}<td class="stand"></td></tr>`);
@@ -64,10 +87,37 @@
 
     const schritte = liste.reduce((summe, t) => summe + anzahlErledigt(t), 0);
     const prozent = Math.round((schritte / (plaetze * SCHRITTE.length)) * 100);
-    $('zusammenfassung').textContent = `${liste.length} von ${plaetze} angemeldet · ${prozent} % aller Schritte erledigt`;
+    const fertig = liste.filter((t) => anzahlErledigt(t) === SCHRITTE.length).length;
+    $('zusammenfassung').textContent = `${liste.length} von ${plaetze} angemeldet · ${fertig} fertig · ${prozent} % aller Schritte erledigt`;
 
+    renderOffen(offen);
     renderVerlauf(liste);
     bekannteSchritte = erledigtJetzt;
+  }
+
+  // „Jetzt zu tun“: wer gerade auf jemand anderen wartet. Fehlt die Liste in den Daten, bleibt der Bereich weg.
+  function renderOffen(offen) {
+    const bereich = $('offen-bereich');
+    bereich.hidden = !(daten && Array.isArray(daten.offen));
+    if (bereich.hidden) return;
+    if (!offen.length) {
+      $('offen').innerHTML = '<p class="leise">Gerade wartet niemand.</p>';
+      return;
+    }
+    $('offen').innerHTML = OFFEN.map((art) => {
+      const eintraege = offen.filter((o) => o.typ === art.typ);
+      if (!eintraege.length) return '';
+      const punkte = eintraege.map((o) => {
+        const url = typeof o.url === 'string' && o.url.startsWith('https://github.com/') ? o.url : null;
+        const wer = `${escape(o.name || o.login)}${art.typ === 'einladung' ? ` <span class="login">@${escape(o.login)}</span>` : ''}`;
+        const seit = o.seit ? `<span class="seit">${escape(relativeZeit(o.seit).replace(/^vor /, 'seit '))}</span>` : '';
+        return `<li>${url ? `<a href="${escape(url)}">${wer}</a>` : wer}${seit}</li>`;
+      }).join('');
+      const zusatz = art.typ === 'einladung'
+        ? ` <a class="aktion" href="${escape(FST.REPO_URL)}/settings/access">einladen</a>`
+        : '';
+      return `<h3>${escape(art.titel)} <span class="zahl">${eintraege.length}</span>${zusatz}</h3><ul>${punkte}</ul>`;
+    }).join('');
   }
 
   function renderVerlauf(liste) {
@@ -135,7 +185,7 @@
       if (neu) {
         zustand = 'ok';
         daten = neu;
-        const neueSignatur = JSON.stringify([neu.teilnehmer, neu.aktivitaet, neu.plaetze]);
+        const neueSignatur = JSON.stringify([neu.teilnehmer, neu.aktivitaet, neu.plaetze, neu.offen]);
         if (neueSignatur !== signatur) {
           signatur = neueSignatur;
           render();
@@ -180,8 +230,10 @@
     } catch { /* ohne echtes Vollbild geht es trotzdem */ }
   });
   document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) vollbildSetzen(false);
+    if (!document.fullscreenElement && !BEAMER) vollbildSetzen(false);
   });
+  // fortschritt.html?beamer startet gleich in der Beamer-Ansicht (echtes Vollbild dann mit F11).
+  if (BEAMER) vollbildSetzen(true);
 
   // ---------- Testdaten (?demo) ----------
 
@@ -225,6 +277,12 @@
           const t = offen[Math.floor(Math.random() * offen.length)];
           erledigen(t, SCHRITTE.find((s) => !t.erledigt[s.id]), Date.now());
         }
+        stand.offen = stand.teilnehmer.flatMap((t) => {
+          const eintrag = (typ, seit) => ({ typ, login: t.login, name: t.name, text: '', url: null, seit });
+          if (t.erledigt.anmeldung && !t.erledigt.team) return [eintrag('einladung', t.erledigt.anmeldung)];
+          if (t.erledigt.pr && !t.erledigt.merge) return [eintrag(t.login.length % 2 ? 'review' : 'merge', t.erledigt.pr)];
+          return [];
+        });
         stand.aktualisiert = new Date().toISOString();
         return JSON.parse(JSON.stringify(stand));
       },

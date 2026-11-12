@@ -20,6 +20,7 @@
     <nav aria-label="Seiten">
       <a href="./">Anleitung</a>
       <a href="fortschritt.html" aria-current="page">Fortschritt</a>
+      <a href="quiz.html">Quiz</a>
       <a href="hilfe.html">Hilfe</a>
       <a href="https://github.com/Yourworstdream/FSTAUD25" data-repo="">GitHub</a>
     </nav>
@@ -43,19 +44,25 @@
       <table class="liste" id="liste"></table>
       <p class="legende" id="legende"></p>
     </div>
-    <section aria-labelledby="verlauf-titel">
-      <h2 id="verlauf-titel">Zuletzt passiert</h2>
-      <ul class="verlauf" id="verlauf"></ul>
+    <div class="seite">
+      <section id="offen-bereich" aria-labelledby="offen-titel" hidden>
+        <h2 id="offen-titel">Jetzt zu tun</h2>
+        <div class="offen" id="offen" aria-live="polite"></div>
+      </section>
+      <section class="verlauf-bereich" aria-labelledby="verlauf-titel">
+        <h2 id="verlauf-titel">Zuletzt passiert</h2>
+        <ul class="verlauf" id="verlauf"></ul>
+      </section>
       <figure class="qr">
         <img src="assets/qr-anleitung.svg" alt="QR-Code zur Anleitung">
         <figcaption>Anleitung aufs Handy: Kamera auf den Code halten.</figcaption>
       </figure>
-    </section>
+    </div>
   </div>
 </main>
 
 <footer class="fuss">
-  Die Liste aktualisiert sich von selbst, etwa eine Minute nach jeder Aktion auf GitHub. · <a href="fortschritt.html?demo">Beispiel mit Testdaten</a>
+  Die Liste aktualisiert sich von selbst, etwa eine Minute nach jeder Aktion auf GitHub. · <a href="fortschritt.html?beamer">Beamer-Ansicht</a> · <a href="fortschritt.html?demo">Beispiel mit Testdaten</a>
 </footer>
 
 </body>
