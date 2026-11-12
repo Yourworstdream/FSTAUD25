@@ -49,7 +49,7 @@
       const erledigt = Boolean(t && t.erledigt && t.erledigt[s.id]);
       document.querySelector(`#uebersicht [data-schritt="${s.id}"]`)?.classList.toggle('erledigt', erledigt);
       const nr = document.querySelector(`#schritt-${s.nr} .schritt-nr`);
-      if (nr) nr.innerHTML = `Schritt ${s.nr} von 7${erledigt ? ' · <span class="ok">erledigt</span>' : ''}`;
+      if (nr) nr.innerHTML = `Schritt ${s.nr} von 7 · ${erledigt ? '<span class="ok">erledigt</span>' : FST.escape(nr.dataset.dauer || '')}`;
     });
     if (!daten) return;
     $('ich-stand').textContent = t

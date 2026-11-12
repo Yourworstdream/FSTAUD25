@@ -1,6 +1,7 @@
 // Berechnet den Fortschritt aller Klassenmitglieder aus der Aktivität im Repository
 // und schreibt ihn nach fortschritt.json – diese Datei zeigt fortschritt.html live an.
 // Außerdem: Labels anlegen, Anmelde-Issues begrüßen und nach angenommener Einladung schließen.
+// Die Liste `offen` zeigt, wer gerade auf was wartet.
 // Aufgerufen vom Workflow .github/workflows/fortschritt.yml über actions/github-script.
 
 const fs = require('fs');
@@ -33,7 +34,7 @@ const PR_ABFRAGE = `query($owner: String!, $repo: String!, $cursor: String) {
     pullRequests(first: 50, after: $cursor) {
       pageInfo { hasNextPage endCursor }
       nodes {
-        number title url createdAt mergedAt isCrossRepository
+        number title url state createdAt mergedAt isCrossRepository
         author { __typename login avatarUrl(size: 96) }
         commits { totalCount }
         files(first: 100) { nodes { path } }
@@ -235,7 +236,62 @@ module.exports = async ({ github, context, core }) => {
 
   // ---------- Anmelde-Issues betreuen ----------
 
-  await anmeldungenBetreuen({ github, context, core, owner, repo, seitenUrl, anmeldungen, mitglieder, mitgliedLogins });
+  await anmeldungenBetreuen({ github, core, owner, repo, seitenUrl, anmeldungen, mitglieder, mitgliedLogins });
+
+  // ---------- Wer wartet auf was ----------
+
+  const offen = [];
+  const vormerken = (person, typ, text, url, seit) => {
+    offen.push({ typ, login: person.login, name: person.name || person.login, text, url, seit });
+  };
+
+  // Offenes Anmelde-Issue, aber noch kein Collaborator – pro Person nur das älteste Issue
+  if (mitglieder) {
+    const wartend = new Set();
+    const offeneAnmeldungen = anmeldungen
+      .filter(({ issue }) => issue.state === 'OPEN')
+      .sort((a, b) => zeitVergleich(a.issue.createdAt, b.issue.createdAt));
+    for (const { issue, person } of offeneAnmeldungen) {
+      const schluessel = person.login.toLowerCase();
+      if (mitgliedLogins.has(schluessel) || wartend.has(schluessel)) continue;
+      wartend.add(schluessel);
+      vormerken(person, 'einladung', 'wartet auf die Einladung', issue.url, issue.createdAt);
+    }
+  }
+
+  // Offene Pull Requests: je nach letzter Entscheidung jedes Reviewers überarbeiten, mergen oder warten
+  for (const pr of pulls) {
+    const offenerPr = !pr.mergedAt && (pr.state || 'OPEN') === 'OPEN';
+    const autor = holen(pr.author);
+    if (!offenerPr || !autor || !kader.has(autor.login.toLowerCase())) continue;
+    const entscheidungen = new Map(); // Reviewer (klein) -> letztes Review mit Freigabe oder Änderungswunsch
+    for (const review of pr.reviews.nodes) {
+      const login = review.author && review.author.login;
+      if (!login || !review.submittedAt || login.toLowerCase() === autor.login.toLowerCase()) continue;
+      if (review.state !== 'APPROVED' && review.state !== 'CHANGES_REQUESTED') continue;
+      const bisher = entscheidungen.get(login.toLowerCase());
+      if (!bisher || review.submittedAt > bisher.submittedAt) entscheidungen.set(login.toLowerCase(), review);
+    }
+    const juengstes = (zustand) => [...entscheidungen.values()]
+      .filter((review) => review.state === zustand)
+      .map((review) => review.submittedAt)
+      .sort(zeitVergleich)
+      .pop();
+    const aendern = juengstes('CHANGES_REQUESTED');
+    const freigabe = juengstes('APPROVED');
+    if (aendern) vormerken(autor, 'aendern', `soll Pull Request #${pr.number} überarbeiten`, pr.url, aendern);
+    else if (freigabe) vormerken(autor, 'merge', `kann Pull Request #${pr.number} mergen`, pr.url, freigabe);
+    else vormerken(autor, 'review', `wartet auf ein Review für Pull Request #${pr.number}`, pr.url, pr.createdAt);
+  }
+
+  // Offene Issues mit Label „hilfe“ – auch von Personen, die noch nicht zur Klasse gehören
+  for (const issue of issues) {
+    const login = issue.author && issue.author.login;
+    if (issue.state !== 'OPEN' || !login || !hatLabel(issue, 'hilfe')) continue;
+    vormerken(holen(issue.author) || { login }, 'hilfe', `braucht Hilfe (Issue #${issue.number})`, issue.url, issue.createdAt);
+  }
+
+  offen.sort((a, b) => zeitVergleich(a.seit, b.seit)); // wer am längsten wartet, zuerst
 
   // ---------- Ergebnis schreiben ----------
 
@@ -265,6 +321,7 @@ module.exports = async ({ github, context, core }) => {
     schritte: SCHRITTE,
     teilnehmer,
     aktivitaet: feed,
+    offen,
     hinweise,
   };
   fs.writeFileSync('fortschritt.json', `${JSON.stringify(daten, null, 2)}\n`);
@@ -336,56 +393,54 @@ async function labelsAnlegen(github, owner, repo, core) {
   }
 }
 
-async function anmeldungenBetreuen({ github, context, core, owner, repo, seitenUrl, anmeldungen, mitglieder, mitgliedLogins }) {
+async function anmeldungenBetreuen({ github, core, owner, repo, seitenUrl, anmeldungen, mitglieder, mitgliedLogins }) {
   const istMitglied = (login) => mitgliedLogins.has(login.toLowerCase());
-  const erledigt = new Set();
+  const schritt3 = `Weiter geht es mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3).`;
 
+  // Bei jedem Lauf vom Zustand ausgehen statt vom Ereignis: abgebrochene Läufe holt der nächste nach.
   try {
-    // Neue Anmeldung: Label setzen und die nächsten Schritte erklären
-    if (context.eventName === 'issues' && context.payload.action === 'opened') {
-      const issue = context.payload.issue;
-      const login = issue.user && issue.user.login;
-      const hatLabel = (issue.labels || []).some((label) => label.name.toLowerCase() === 'anmeldung');
-      if (login && istAnmeldung({ title: issue.title, labels: { nodes: issue.labels || [] } })) {
-        if (!hatLabel) await github.rest.issues.addLabels({ owner, repo, issue_number: issue.number, labels: ['anmeldung'] });
-        if (mitglieder && istMitglied(login)) {
-          await schliessen(github, owner, repo, issue.number, `Hallo @${login}, du bist schon im Team. Weiter geht es mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3).`);
-          erledigt.add(issue.number);
-        } else {
-          await github.rest.issues.createComment({
-            owner, repo, issue_number: issue.number,
-            body: [
-              `Hallo @${login}, danke für deine Anmeldung.`,
-              '',
-              'So geht es weiter:',
-              `1. @${owner} lädt dich als Collaborator in dieses Repository ein. Du bekommst dazu eine E-Mail von GitHub.`,
-              `2. Nimm die Einladung an: https://github.com/${owner}/${repo}/invitations`,
-              '3. Schreib danach hier kurz „angenommen“. Dann wird dieses Issue geschlossen und dein Häkchen in der Klassenliste gesetzt.',
-              `4. Weiter geht es mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3).`,
-            ].join('\n'),
-          });
-        }
-      }
-    }
+    for (const { issue, person } of anmeldungen) {
+      if (issue.state !== 'OPEN') continue;
+      const login = person.login;
+      const kommentare = [...issue.comments.nodes].sort((a, b) => zeitVergleich(a.createdAt, b.createdAt));
+      const begruesst = kommentare.some((kommentar) => istBot(kommentar.author));
 
-    // Kommentar im eigenen Anmelde-Issue, aber noch nicht im Team: erklären, woran es liegt
-    if (context.eventName === 'issue_comment' && context.payload.action === 'created' && mitglieder) {
-      const issue = context.payload.issue;
-      const login = context.payload.comment.user && context.payload.comment.user.login;
-      const eigenes = issue && !issue.pull_request && issue.state === 'open' && issue.user && login === issue.user.login;
-      if (eigenes && istAnmeldung({ title: issue.title, labels: { nodes: issue.labels || [] } }) && !istMitglied(login)) {
+      // Erkennung lief über den Titel: Label nachtragen
+      if (!hatLabel(issue, 'anmeldung')) await github.rest.issues.addLabels({ owner, repo, issue_number: issue.number, labels: ['anmeldung'] });
+
+      // Einladung angenommen (oder schon vorher im Team): schließen
+      if (mitglieder && istMitglied(login)) {
+        await schliessen(github, owner, repo, issue.number, begruesst
+          ? `@${login} hat die Einladung angenommen und ist jetzt im Team. ${schritt3}`
+          : `Hallo @${login}, du bist schon im Team. ${schritt3}`);
+        continue;
+      }
+
+      // Noch keine Antwort vom Bot: die nächsten Schritte erklären
+      if (!begruesst) {
+        await github.rest.issues.createComment({
+          owner, repo, issue_number: issue.number,
+          body: [
+            `Hallo @${login}, danke für deine Anmeldung.`,
+            '',
+            'So geht es weiter:',
+            `1. @${owner} lädt dich als Collaborator in dieses Repository ein. Du bekommst dazu eine E-Mail von GitHub.`,
+            `2. Nimm die Einladung an: https://github.com/${owner}/${repo}/invitations`,
+            '3. Schreib danach hier kurz „angenommen“. Dann wird dieses Issue geschlossen und dein Häkchen in der Klassenliste gesetzt.',
+            `4. ${schritt3}`,
+          ].join('\n'),
+        });
+        continue;
+      }
+
+      // Letztes Wort hat die Person selbst („angenommen“), ist aber noch nicht im Team: erklären, woran es liegt
+      const letzter = kommentare[kommentare.length - 1];
+      const autorLogin = letzter && letzter.author && letzter.author.login;
+      if (mitglieder && autorLogin && autorLogin.toLowerCase() === login.toLowerCase()) {
         await github.rest.issues.createComment({
           owner, repo, issue_number: issue.number,
           body: `@${login}, die Einladung ist noch nicht angenommen. Schau auf https://github.com/${owner}/${repo}/invitations nach. Steht dort nichts, hat dich @${owner} noch nicht eingeladen.`,
         });
-      }
-    }
-
-    // Einladung angenommen: offene Anmelde-Issues schließen
-    if (mitglieder) {
-      for (const { issue, person } of anmeldungen) {
-        if (issue.state !== 'OPEN' || erledigt.has(issue.number) || !istMitglied(person.login)) continue;
-        await schliessen(github, owner, repo, issue.number, `@${person.login} hat die Einladung angenommen und ist jetzt im Team. Weiter geht es mit [Schritt 3 der Anleitung](${seitenUrl}#schritt-3).`);
       }
     }
   } catch (fehler) {
@@ -399,8 +454,22 @@ async function schliessen(github, owner, repo, nummer, text) {
 }
 
 function istAnmeldung(issue) {
+  return hatLabel(issue, 'anmeldung') || /^\s*anmeldung\b/i.test(issue.title || '');
+}
+
+function hatLabel(issue, name) {
   const labels = (issue.labels && issue.labels.nodes) || [];
-  return labels.some((label) => label.name.toLowerCase() === 'anmeldung') || /^\s*anmeldung\b/i.test(issue.title || '');
+  return labels.some((label) => label.name.toLowerCase() === name);
+}
+
+function istBot(autor) {
+  const login = (autor && autor.login) || '';
+  return (autor && autor.__typename === 'Bot') || login.endsWith('[bot]') || login === 'github-actions';
+}
+
+// Für sort(): ISO-Zeitpunkte aufsteigend
+function zeitVergleich(a, b) {
+  return a < b ? -1 : a > b ? 1 : 0;
 }
 
 function nameAusAnmeldung(issue) {
