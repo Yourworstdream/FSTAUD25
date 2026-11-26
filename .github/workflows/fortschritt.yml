@@ -44,7 +44,7 @@ jobs:
     timeout-minutes: 10
     environment:
       name: github-pages
-      url: ${{ steps.veroeffentlichen.outputs.page_url }}fortschritt.html
+      url: ${{ steps.versuch1.outputs.page_url || steps.versuch2.outputs.page_url }}fortschritt.html
     steps:
       - name: main auschecken
         uses: actions/checkout@v5
@@ -76,7 +76,20 @@ jobs:
         with:
           path: _site
 
+      # GitHub findet die eben hochgeladene Webseite manchmal noch nicht
+      # ("No artifacts named github-pages"). Dann kurz warten und noch einmal versuchen,
+      # statt den ganzen Lauf scheitern zu lassen.
       - name: Veröffentlichen
         if: steps.berechnen.outputs.pages == 'true'
-        id: veroeffentlichen
+        id: versuch1
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Kurz warten
+        if: steps.versuch1.outcome == 'failure'
+        run: sleep 30
+
+      - name: Veröffentlichen (zweiter Versuch)
+        if: steps.versuch1.outcome == 'failure'
+        id: versuch2
         uses: actions/deploy-pages@v4
